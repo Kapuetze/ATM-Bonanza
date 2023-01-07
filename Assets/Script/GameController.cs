@@ -12,6 +12,17 @@ public class GameController : MonoBehaviour
     public static GameController instance;
 
     /// <summary>
+    /// Total of how many customers are going to come
+    /// </summary>
+    [SerializeField]
+    int maxCustomers;
+
+    /// <summary>
+    /// How many customers have already left
+    /// </summary>
+    int customersLeft;
+
+    /// <summary>
     /// The current score
     /// </summary>
     int score = 0;
@@ -66,5 +77,15 @@ public class GameController : MonoBehaviour
         score += amount;
 
         UIController.instance.SetScore(score);
+    }
+
+    public void IncrementLeftCustomers()
+    {
+        customersLeft++;
+        if (customersLeft == maxCustomers)
+        {
+            // Game is over
+            UIController.instance.ShowEndScreen(score);
+        }
     }
 }

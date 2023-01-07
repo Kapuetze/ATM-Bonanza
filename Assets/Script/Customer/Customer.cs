@@ -95,6 +95,7 @@ public class Customer : MonoBehaviour
     {
         // TODO: Leave animation
         customerController.RemoveCustomer(gameObject);
+        GameController.instance.IncrementLeftCustomers();
         Debug.Log("Customer left.");
     }
 }

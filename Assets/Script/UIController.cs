@@ -20,6 +20,11 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private GameObject moneyIconPrefab;
 
+    [SerializeField]
+    private GameObject endScreen;
+    [SerializeField]
+    private TMP_Text endScore;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -93,5 +98,16 @@ public class UIController : MonoBehaviour
             // Change the text to the current amount
             newIcon.transform.Find("MoneyText").GetComponent<TMP_Text>().text = item.Value.ToString();
         }
+    }
+
+    public void ShowEndScreen(int score)
+    {
+        endScore.text = score.ToString();
+        endScreen.SetActive(true);
+    }
+
+    public void HideEndScreen()
+    {
+        endScreen.SetActive(false);
     }
 }
