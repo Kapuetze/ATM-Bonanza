@@ -1055,7 +1055,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 700
-  jumpHeight: 4
+  jumpHeight: 2
+  dynamicGravMultiplier: {x: 2, y: 4, z: 8}
   groundCheckSize: 0.4
   groundMask:
     serializedVersion: 2

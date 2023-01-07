@@ -15,8 +15,9 @@ public class Player2D : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D coll;
     private Vector3 velocity;
-    public float grav = -9.81f;
+    private float grav = -9.81f;
     private bool isGrounded = true;
+    private bool doubleJumpReady = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,17 +36,11 @@ public class Player2D : MonoBehaviour
         // ground check logic
         if (targets.Length > 0)
         {
-            isGrounded = true;
+            BeGrounded();
         }
         else
         {
             isGrounded = false;
-        }
-
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-            rb.gravityScale = dynamicGravMultiplier.y;
         }
 
         #endregion
@@ -66,6 +61,11 @@ public class Player2D : MonoBehaviour
         {
             Jump();
         }
+        else if(Input.GetButtonDown("Jump") && !isGrounded && doubleJumpReady)
+        {
+            Jump();
+            doubleJumpReady = false;
+        }
         #endregion
 
         #region falling
@@ -83,5 +83,17 @@ public class Player2D : MonoBehaviour
         float jumpForce = Mathf.Sqrt(jumpHeight * -2f * ((grav * rb.gravityScale) * rb.gravityScale));
         rb.velocity = Vector2.zero;
         rb.velocity += Vector2.up * jumpForce;
+    }
+
+    private void BeGrounded()
+    {
+        doubleJumpReady = true;
+        isGrounded = true;
+
+        if (velocity.y < 0)
+        {
+            velocity.y = -2f;
+            rb.gravityScale = dynamicGravMultiplier.y;
+        }
     }
 }
