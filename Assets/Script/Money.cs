@@ -1,67 +1,52 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
-public enum Denomination { Five = 5, Ten = 10, Twenty = 20, Fifty = 50, Onehundred = 100, Twohundred = 200, Fivehundred = 500}
-public class Bill
+public enum Denomination 
 {
-    private Denomination denomination;
-    private int value = 5;
+    [Description("#56FF74")]
+    Five = 5, 
+    [Description("#FF4A37")]
+    Ten = 10,
+    [Description("#3643FF")]
+    Twenty = 20,
+    [Description("#56FF74")]
+    Fifty = 50,
+    Onehundred = 100, 
+    Twohundred = 200, 
+    Fivehundred = 500
+}
 
-    public Bill() 
+public static class EnumHelper
+{
+    public static string GetDescription<T>(this T enumValue)
+        where T : struct, IConvertible
     {
-        SetValue(Denomination.Five);
-    }
+        if (!typeof(T).IsEnum)
+            return null;
 
-    public Bill(Denomination deno)
-    {
-        SetValue(deno);
-    }
+        var description = enumValue.ToString();
+        var fieldInfo = enumValue.GetType().GetField(enumValue.ToString());
 
-    public int GetValue()
-    {
-        return value;
-    }
-
-    public Denomination GetValueAsDenomination()
-    {
-        return denomination;
-    }
-
-    private void SetValue(Denomination deno)
-    {
-        denomination = deno;
-        switch(deno)
+        if (fieldInfo != null)
         {
-            case Denomination.Five:
-                value = 5;
-                break;
-            case Denomination.Ten:
-                value = 10;
-                break;
-            case Denomination.Twenty:
-                value = 20;
-                break;
-            case Denomination.Fifty:
-                value = 50;
-                break;
-            case Denomination.Onehundred:
-                value = 100;
-                break;
-            case Denomination.Twohundred:
-                value = 200;
-                break;
-            case Denomination.Fivehundred:
-                value = 500;
-                break;
+            var attrs = fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), true);
+            if (attrs != null && attrs.Length > 0)
+            {
+                description = ((DescriptionAttribute)attrs[0]).Description;
+            }
         }
-    }
 
+        return description;
+    }
 }
 
 public class Money : MonoBehaviour
 {
     public Denomination denomination = Denomination.Five;
+
     // Start is called before the first frame update
     void Start()
     {

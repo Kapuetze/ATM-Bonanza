@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4496414834573369897}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.47059768, y: -3.459405, z: -10}
+  m_LocalPosition: {x: -2.2478828, y: 4.292615, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -62,7 +62,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15.51
+  orthographic size: 11.1
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -285,6 +285,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 187505532488679750, guid: 94573b3cd67c66e45b99e3f0f3fffbe7, type: 3}
   m_PrefabInstance: {fileID: 3938296905581636320}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3764309323641924524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 187505532488679756, guid: 94573b3cd67c66e45b99e3f0f3fffbe7, type: 3}
+  m_PrefabInstance: {fileID: 3938296905581636320}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9201521113549988188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3764309323641924524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1004fa65ffd1d8b489b53f4a8aee8e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5257451621652577250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -298,7 +315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9102228182112692340, guid: b522a47bad83b494b9bd21be570ffee2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.47059768
+      value: 0.4705971
       objectReference: {fileID: 0}
     - target: {fileID: 9102228182112692340, guid: b522a47bad83b494b9bd21be570ffee2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -340,6 +357,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 3764309323641924518}
+    - target: {fileID: 9102228182112692341, guid: b522a47bad83b494b9bd21be570ffee2, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 9102228182112692346, guid: b522a47bad83b494b9bd21be570ffee2, type: 3}
       propertyPath: m_Name
       value: CM vcam1
