@@ -16,6 +16,7 @@ public class Player2D : MonoBehaviour
 
     private Rigidbody2D rb;
     private Collider2D coll;
+    private Animator anim;
     private Vector3 velocity;
     private float grav = -9.81f;
     public float currentDrag = 1f;
@@ -28,12 +29,12 @@ public class Player2D : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         x = Input.GetAxis("Horizontal");
         #region ground check
         // lowest point of the collider
@@ -102,10 +103,20 @@ public class Player2D : MonoBehaviour
             velocity.y = -2f;
             rb.gravityScale = dynamicGravMultiplier.y;
         }
+
+        if (x != 0)
+        {
+            anim.SetInteger("State", 1);
+        }
+        if (x == 0)
+        {
+            anim.SetInteger("State", 0);
+        }
     }
 
     private void Airborn()
     {
+        anim.SetInteger("State", 2);
         isGrounded = false;
         currentDrag = dragCurve.Evaluate(airtime);
         currentDrag = Mathf.Clamp(currentDrag, 1f, airDrag);
