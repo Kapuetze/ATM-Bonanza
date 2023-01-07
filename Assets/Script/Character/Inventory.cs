@@ -35,12 +35,12 @@ public class Inventory : MonoBehaviour
         }
 
         //Interact with F
-        if (Input.GetKeyDown(KeyCode.F) && GetCurrentSelectedItem() != null && currentDispenserZone != null)
+        if (Input.GetKeyDown(KeyCode.F) && GetCurrentSelectedItem() != null && currentDispenserZone != null && currentDispenserZone.customerController.currentCustomer != null)
         {
-            Denomination denomination = GetCurrentSelectedItem().Value;
-            currentDispenserZone.customer.GetComponent<Customer>().TakeCash((int)denomination);
+            Item item = GetCurrentSelectedItem();
+            currentDispenserZone.customerController.currentCustomer.TakeCash((int)item.denomination);
 
-            RemoveBill(denomination);
+            RemoveBill(item.denomination);
         }
     }
 
@@ -80,11 +80,12 @@ public class Inventory : MonoBehaviour
     {
         currentItem += direction;
         currentItem = Mathf.Clamp(currentItem, 0, moneyBag.Count - 1);
-        if (moneyBag.Count > 0)
+
+        Item item = GetCurrentSelectedItem();
+        if (item != null)
         {
-            var element = moneyBag.ElementAt(currentItem);
             // Display currently selected item in the UI
-            SetSelectedItem(element.Key, element.Value);
+            SetSelectedItem(item);
         }
         else
         {
@@ -92,16 +93,26 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    private Item GetCurrentSelectedItem()
+    {
+        return GetItemAt(currentItem);
+    }
+
     /// <summary>
     /// Get the currently selected denomination or null if nothing is selected
     /// </summary>
     /// <returns></returns>
-    private Denomination? GetCurrentSelectedItem()
+    private Item GetItemAt(int index)
     {
-        Denomination? result = null;
+        Item result = null;
         if (moneyBag.Count > 0)
         {
-            result = moneyBag.ElementAt(currentItem).Key;
+            var element = moneyBag.ElementAt(currentItem);
+            result = new Item
+            {
+                denomination = element.Key,
+                amount = element.Value
+            };
         }
 
         return result;
@@ -138,6 +149,8 @@ public class Inventory : MonoBehaviour
             // Remove the whole key entry if it is 0
             if (moneyBag[denomination] == 0)
             {
+                GetCurrentSelectedItem();
+                RemoveSelectedItem();
                 moneyBag.Remove(denomination);
             }
         }
@@ -150,18 +163,18 @@ public class Inventory : MonoBehaviour
     /// </summary>
     /// <param name="currentDenomination"></param>
     /// <exception cref="NotImplementedException"></exception>
-    void SetSelectedItem(Denomination currentDenomination, int amount)
+    void SetSelectedItem(Item item)
     {
         if (!selectedMoneyIcon.activeInHierarchy)
             selectedMoneyIcon.SetActive(true);
 
         // Get the color from enumeration description
-        string hexColor = currentDenomination.GetDescription();
+        string hexColor = item.denomination.GetDescription();
         ColorUtility.TryParseHtmlString(hexColor, out Color color);
         selectedMoneyIcon.GetComponent<Image>().color = color;
 
         // Change the text to the current amount
-        selectedMoneyIcon.transform.Find("MoneyText").GetComponent<TMP_Text>().text = amount.ToString();
+        selectedMoneyIcon.transform.Find("MoneyText").GetComponent<TMP_Text>().text = item.amount.ToString();
     }
 
     /// <summary>
@@ -171,6 +184,13 @@ public class Inventory : MonoBehaviour
     /// <exception cref="NotImplementedException"></exception>
     void RemoveSelectedItem()
     {
+        currentItem = 0;
         selectedMoneyIcon.SetActive(false);
     }
+}
+
+class Item
+{
+    public Denomination denomination { get; set; }
+    public int amount { get; set; }
 }

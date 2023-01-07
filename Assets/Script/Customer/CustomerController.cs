@@ -6,11 +6,6 @@ using UnityEngine;
 public class CustomerController : MonoBehaviour
 {
     /// <summary>
-    /// Singleton instance
-    /// </summary>
-    public static CustomerController instance;
-
-    /// <summary>
     /// The customer gameobject
     /// </summary>
     [SerializeField]
@@ -20,36 +15,17 @@ public class CustomerController : MonoBehaviour
     /// Point where the customer spawns
     /// </summary>
     [SerializeField]
-    private Transform spawnPoint;
-
-    /// <summary>
-    /// All available money deposits with customers
-    /// </summary>
-    [SerializeField]
-    private GameObject[] moneyDispensers;
+    private Transform customerSpawnPoint;
 
     /// <summary>
     /// The currently waiting customers
     /// </summary>
-    private List<GameObject> currentCustomers = new List<GameObject>();
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        // Create singleton
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
+    [HideInInspector]
+    public Customer currentCustomer;
 
     void Start()
     {
-
+        SpawnCustomer();
     }
 
     // Update is called once per frame
@@ -63,22 +39,8 @@ public class CustomerController : MonoBehaviour
     /// </summary>
     public void SpawnCustomer()
     {
-        GameObject dispenser = GetFreeDispenser();
-        if (dispenser != null)
-        {
-            GameObject newCustomer = Instantiate(GetRandomCustomerPRefab(), spawnPoint.position, Quaternion.identity);
-            currentCustomers.Add(newCustomer);
-            dispenser.GetComponent<MoneyDispenser>().customer = newCustomer;
-        }
-    }
-
-    /// <summary>
-    /// Get a dispenser without an active customer
-    /// </summary>
-    /// <returns></returns>
-    private GameObject GetFreeDispenser()
-    {
-        return moneyDispensers.FirstOrDefault(i => i.GetComponent<MoneyDispenser>().customer == null);
+        currentCustomer = Instantiate(GetRandomCustomerPrefab(), customerSpawnPoint.position, Quaternion.identity).GetComponent<Customer>();
+        currentCustomer.SetCustomerController(this); 
     }
 
     /// <summary>
@@ -87,15 +49,12 @@ public class CustomerController : MonoBehaviour
     /// <param name="customer"></param>
     public void RemoveCustomer(GameObject customer)
     {
-        // Remove customer from active deposit
-        moneyDispensers.FirstOrDefault(i => i.GetComponent<MoneyDispenser>().customer == customer).GetComponent<MoneyDispenser>().customer = null;
-        currentCustomers.Remove(customer);
-
+        Destroy(currentCustomer.gameObject);
         // Spawn a new customer if necessary
         SpawnCustomer();
     }
 
-    private GameObject GetRandomCustomerPRefab()
+    private GameObject GetRandomCustomerPrefab()
     {
         int rand = Random.Range(0, customerPrefabs.Count);
         return customerPrefabs[rand];
