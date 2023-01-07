@@ -85,7 +85,7 @@ public class GameController : MonoBehaviour
         if (customersLeft == maxCustomers)
         {
             // Game is over
-
+            UIController.instance.ShowEndScreen(score);
         }
     }
 }
