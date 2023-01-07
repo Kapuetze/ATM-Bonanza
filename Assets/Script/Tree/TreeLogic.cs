@@ -31,7 +31,7 @@ public class TreeLogic : MonoBehaviour
             // Check if grow spot is empty and cooldown exceeded
             if(!growSpot.money && (growSpot.cooldown == 0f || Time.time > growSpot.cooldown))
             {
-                growSpot.money = Instantiate(moneyPrefab);
+                growSpot.money = Instantiate(moneyPrefab, growSpot.transform);
             }
         }
     }
