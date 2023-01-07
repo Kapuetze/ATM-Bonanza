@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Inventory : MonoBehaviour
 {
-    private Dictionary<int, int> moneybag = new Dictionary<int, int>();
+    private Dictionary<Denomination, int> moneybag = new Dictionary<Denomination, int>();
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +23,12 @@ public class Inventory : MonoBehaviour
         Money other;
         if(collision.collider.gameObject.TryGetComponent<Money>(out other))
         {
-            foreach (KeyValuePair<int, int> kvp in moneybag)
+            foreach (Denomination d in moneybag.Keys)
             {
+                if(d == other.denomination)
+                {
+                    moneybag[d] += 1; 
+                }
             }
         }
     }

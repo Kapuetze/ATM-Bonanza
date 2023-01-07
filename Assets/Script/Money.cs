@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Denomination { Five, Ten, Twenty, Fifty, Onehundred, Twohundred, Fivehundred}
+public enum Denomination { Five = 5, Ten = 10, Twenty = 20, Fifty = 50, Onehundred = 100, Twohundred = 200, Fivehundred = 500}
 public class Bill
 {
     private Denomination denomination;
@@ -61,7 +61,7 @@ public class Bill
 
 public class Money : MonoBehaviour
 {
-    public Bill bill = new Bill();
+    public Denomination denomination = Denomination.Five;
     // Start is called before the first frame update
     void Start()
     {
