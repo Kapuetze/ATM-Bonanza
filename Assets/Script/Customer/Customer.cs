@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Customer : MonoBehaviour
 {
@@ -23,12 +25,6 @@ public class Customer : MonoBehaviour
     float timer;
 
     /// <summary>
-    /// Cash notes possible
-    /// </summary>
-    [SerializeField]
-    private int[] possibleCash;
-
-    /// <summary>
     /// The money deposit the customer is waiting on
     /// </summary>
     private CustomerController customerController;
@@ -43,7 +39,8 @@ public class Customer : MonoBehaviour
     void Start()
     {
         // Determine how much money the customer wants
-        requestedCash = possibleCash[Random.Range(0, possibleCash.Length)];
+        var enumArray = Enum.GetValues(typeof(Denomination));
+        requestedCash = (int)enumArray.GetValue(Random.Range(0, enumArray.Length));
         timer = requestedCash;
 
         requestedMoneyText.text = requestedCash.ToString();
@@ -69,6 +66,8 @@ public class Customer : MonoBehaviour
     {
         receivedCash += cash;
         int cashDifference = requestedCash - receivedCash;
+        requestedMoneyText.text = cashDifference.ToString();
+
         if (cashDifference <= 0)
         {
             // Punish the player if the received cash exceeds what was requested
