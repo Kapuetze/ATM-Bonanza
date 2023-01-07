@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class UIController : MonoBehaviour
 {
@@ -12,6 +14,10 @@ public class UIController : MonoBehaviour
 
     private TMP_Text scoreText;
     private GameObject mainMenu;
+    private GameObject inventory;
+
+    [SerializeField]
+    private GameObject moneyIconPrefab;
 
     // Start is called before the first frame update
     void Awake()
@@ -27,6 +33,7 @@ public class UIController : MonoBehaviour
         }
 
         mainMenu = transform.Find("MainMenu").gameObject;
+        inventory = transform.Find("Inventory").gameObject;
         scoreText = transform.Find("Score").GetComponent<TMP_Text>();
     }
 
@@ -57,6 +64,33 @@ public class UIController : MonoBehaviour
         else
         {
             mainMenu.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// Sets the inventory to display
+    /// </summary>
+    public void SetInventory(Dictionary<Denomination, int> newInventory)
+    {
+        // Clear inventory list
+        foreach (Transform child in inventory.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Add new inventory items
+        foreach (var item in newInventory)
+        {
+            // Instantiate new icon
+            GameObject newIcon = Instantiate(moneyIconPrefab, inventory.transform);
+
+            // Get the color from enumeration description
+            string hexColor = item.Key.GetDescription();
+            ColorUtility.TryParseHtmlString(hexColor, out Color color);
+            newIcon.GetComponent<Image>().color = color;
+
+            // Change the text to the current amount
+            newIcon.transform.Find("MoneyText").GetComponent<TMP_Text>().text = item.Value.ToString();
         }
     }
 }
