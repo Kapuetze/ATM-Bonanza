@@ -31,7 +31,10 @@ public class Customer : MonoBehaviour
     void Awake()
     {
         requestedMoneyText = transform.Find("Canvas/RequestedMoney").GetComponentInChildren<TMP_Text>();
+    }
 
+    void Start()
+    {
         // Determine how much money the customer wants
         requestedCash = possibleCash[Random.Range(0, possibleCash.Length)];
         timer = requestedCash;
@@ -59,8 +62,11 @@ public class Customer : MonoBehaviour
         int cashDifference = requestedCash - receivedCash;
         if (cashDifference <= 0)
         {
-            // TODO: Maybe punish the player if the received cash exceeds what was requested
+            // Punish the player if the received cash exceeds what was requested
             GameController.instance.AddScore(requestedCash + cashDifference);
+
+            // TODO: Play cash sound effect
+
             Leave();
         }
     }
