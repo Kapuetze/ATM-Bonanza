@@ -84,6 +84,20 @@ public class Player2D : MonoBehaviour
         rb.velocity = new Vector2(x * speed * Time.deltaTime, rb.velocity.y);
     }
 
+    public void ForceJump(float tempHeight)
+    {
+        float temp = jumpHeight;
+        jumpHeight = tempHeight;
+        BeGrounded();
+        Jump();
+        jumpHeight = temp;
+    }
+
+    public void StandUp()
+    {
+        
+    }
+
     private void Jump()
     {
         float jumpForce = Mathf.Sqrt(jumpHeight * -2f * ((grav * rb.gravityScale) * rb.gravityScale));

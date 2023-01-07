@@ -9,7 +9,7 @@ public class CustomerController : MonoBehaviour
     /// The customer gameobject
     /// </summary>
     [SerializeField]
-    private GameObject customerPrefab;
+    private List<GameObject> customerPrefabs = new List<GameObject>();
 
     /// <summary>
     /// Point where the customer spawns
@@ -39,7 +39,7 @@ public class CustomerController : MonoBehaviour
     /// </summary>
     public void SpawnCustomer()
     {
-        currentCustomer = Instantiate(customerPrefab, customerSpawnPoint.position, Quaternion.identity).GetComponent<Customer>();
+        currentCustomer = Instantiate(GetRandomCustomerPrefab(), customerSpawnPoint.position, Quaternion.identity).GetComponent<Customer>();
         currentCustomer.SetCustomerController(this); 
     }
 
@@ -52,5 +52,11 @@ public class CustomerController : MonoBehaviour
         Destroy(currentCustomer.gameObject);
         // Spawn a new customer if necessary
         SpawnCustomer();
+    }
+
+    private GameObject GetRandomCustomerPrefab()
+    {
+        int rand = Random.Range(0, customerPrefabs.Count);
+        return customerPrefabs[rand];
     }
 }
