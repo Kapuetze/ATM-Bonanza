@@ -6,6 +6,8 @@ public class Player2D : MonoBehaviour
 {
     public float speed = 12f;
     public float jumpHeight = 4f;
+    public float airDrag = 2f;
+    public AnimationCurve dragCurve;
     [Tooltip("x = minimum multiplier applied to gravity while jumping and pressing jump. y = medium multiplier. z = maximum multiplier while falling.")]
     public Vector3 dynamicGravMultiplier = Vector3.one; 
 
@@ -16,6 +18,9 @@ public class Player2D : MonoBehaviour
     private Collider2D coll;
     private Vector3 velocity;
     private float grav = -9.81f;
+    public float currentDrag = 1f;
+    public float airtime = 0f;
+    private float x;
     private bool isGrounded = true;
     private bool doubleJumpReady = true;
     // Start is called before the first frame update
@@ -28,6 +33,8 @@ public class Player2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        x = Input.GetAxis("Horizontal");
         #region ground check
         // lowest point of the collider
         Vector3 low = new Vector3(coll.bounds.center.x, coll.bounds.min.y, coll.bounds.center.z);
@@ -40,12 +47,10 @@ public class Player2D : MonoBehaviour
         }
         else
         {
-            isGrounded = false;
+            Airborn();
         }
 
         #endregion
-
-        float x = Input.GetAxis("Horizontal");
         #region Jumping
 
         if (Input.GetButton("Jump"))
@@ -89,11 +94,22 @@ public class Player2D : MonoBehaviour
     {
         doubleJumpReady = true;
         isGrounded = true;
+        airtime = 0f;
+        currentDrag = 1f;
 
         if (velocity.y < 0)
         {
             velocity.y = -2f;
             rb.gravityScale = dynamicGravMultiplier.y;
         }
+    }
+
+    private void Airborn()
+    {
+        isGrounded = false;
+        currentDrag = dragCurve.Evaluate(airtime);
+        currentDrag = Mathf.Clamp(currentDrag, 1f, airDrag);
+        x = x / currentDrag;
+        airtime += Time.deltaTime;
     }
 }
