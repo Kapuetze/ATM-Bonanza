@@ -29,7 +29,7 @@ public class Customer : MonoBehaviour
     /// <summary>
     /// The money deposit the customer is waiting on
     /// </summary>
-    private MoneyDispenser moneyDeposit;
+    private CustomerController customerController;
 
     private TMP_Text requestedMoneyText;
 
@@ -45,6 +45,8 @@ public class Customer : MonoBehaviour
         timer = requestedCash;
 
         requestedMoneyText.text = requestedCash.ToString();
+
+        // TODO: Spawn animation
     }
 
     void Update()
@@ -68,7 +70,7 @@ public class Customer : MonoBehaviour
         if (cashDifference <= 0)
         {
             // Punish the player if the received cash exceeds what was requested
-            GameController.instance.AddScore(requestedCash + cashDifference);
+            GameController.instance.AddScore(requestedCash);
 
             // TODO: Play cash sound effect
 
@@ -77,12 +79,21 @@ public class Customer : MonoBehaviour
     }
 
     /// <summary>
+    /// Reference the CustomerController who instantiated this customer
+    /// </summary>
+    /// <param name="controller"></param>
+    public void SetCustomerController(CustomerController controller)
+    {
+        customerController = controller;
+    }
+
+    /// <summary>
     /// Customer leaves without giving points
     /// </summary>
     private void Leave()
     {
-        CustomerController.instance.RemoveCustomer(gameObject);
-        Destroy(gameObject);
+        // TODO: Leave animation
+        customerController.RemoveCustomer(gameObject);
         Debug.Log("Customer left.");
     }
 }

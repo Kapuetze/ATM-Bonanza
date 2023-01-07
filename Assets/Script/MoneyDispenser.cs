@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class MoneyDispenser : MonoBehaviour
 {
-    public GameObject customer;
+    public CustomerController customerController;
 }

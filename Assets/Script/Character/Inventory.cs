@@ -35,10 +35,10 @@ public class Inventory : MonoBehaviour
         }
 
         //Interact with F
-        if (Input.GetKeyDown(KeyCode.F) && GetCurrentSelectedItem() != null && currentDispenserZone != null)
+        if (Input.GetKeyDown(KeyCode.F) && GetCurrentSelectedItem() != null && currentDispenserZone != null && currentDispenserZone.customerController.currentCustomer != null)
         {
             Item item = GetCurrentSelectedItem();
-            currentDispenserZone.customer.GetComponent<Customer>().TakeCash((int)item.denomination);
+            currentDispenserZone.customerController.currentCustomer.TakeCash((int)item.denomination);
 
             RemoveBill(item.denomination);
         }

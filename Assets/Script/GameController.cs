@@ -47,7 +47,6 @@ public class GameController : MonoBehaviour
     public void StartLevel()
     {
         // Spawn the first customer
-        CustomerController.instance.SpawnCustomer();
     }
 
     /// <summary>
