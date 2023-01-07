@@ -26,6 +26,11 @@ public class Customer : MonoBehaviour
     [SerializeField]
     private int[] possibleCash;
 
+    /// <summary>
+    /// The money deposit the customer is waiting on
+    /// </summary>
+    private MoneyDispenser moneyDeposit;
+
     private TMP_Text requestedMoneyText;
 
     void Awake()

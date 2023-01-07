@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CustomerController : MonoBehaviour
@@ -22,10 +23,15 @@ public class CustomerController : MonoBehaviour
     private Transform spawnPoint;
 
     /// <summary>
+    /// All available money deposits with customers
+    /// </summary>
+    [SerializeField]
+    private GameObject[] moneyDispensers;
+
+    /// <summary>
     /// The currently waiting customers
     /// </summary>
     private List<GameObject> currentCustomers = new List<GameObject>();
-
 
     // Start is called before the first frame update
     void Awake()
@@ -57,7 +63,22 @@ public class CustomerController : MonoBehaviour
     /// </summary>
     public void SpawnCustomer()
     {
-        currentCustomers.Add(Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity));
+        GameObject dispenser = GetFreeDispenser();
+        if (dispenser != null)
+        {
+            GameObject newCustomer = Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity);
+            currentCustomers.Add(newCustomer);
+            dispenser.GetComponent<MoneyDispenser>().customer = newCustomer;
+        }
+    }
+
+    /// <summary>
+    /// Get a dispenser without an active customer
+    /// </summary>
+    /// <returns></returns>
+    private GameObject GetFreeDispenser()
+    {
+        return moneyDispensers.FirstOrDefault(i => i.GetComponent<MoneyDispenser>().customer == null);
     }
 
     /// <summary>
@@ -66,6 +87,8 @@ public class CustomerController : MonoBehaviour
     /// <param name="customer"></param>
     public void RemoveCustomer(GameObject customer)
     {
+        // Remove customer from active deposit
+        moneyDispensers.FirstOrDefault(i => i.GetComponent<MoneyDispenser>().customer == customer).GetComponent<MoneyDispenser>().customer = null;
         currentCustomers.Remove(customer);
 
         // Spawn a new customer if necessary
