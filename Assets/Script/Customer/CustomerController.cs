@@ -16,13 +16,19 @@ public class CustomerController : MonoBehaviour
     private GameObject customerPrefab;
 
     /// <summary>
+    /// Point where the customer spawns
+    /// </summary>
+    [SerializeField]
+    private Transform spawnPoint;
+
+    /// <summary>
     /// The currently waiting customers
     /// </summary>
     private List<GameObject> currentCustomers = new List<GameObject>();
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // Create singleton
         if (instance == null)
@@ -33,6 +39,11 @@ public class CustomerController : MonoBehaviour
         {
             Destroy(this);
         }
+    }
+
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
@@ -46,7 +57,7 @@ public class CustomerController : MonoBehaviour
     /// </summary>
     public void SpawnCustomer()
     {
-        currentCustomers.Add(Instantiate(customerPrefab, Vector2.one, Quaternion.identity));
+        currentCustomers.Add(Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity));
     }
 
     /// <summary>
