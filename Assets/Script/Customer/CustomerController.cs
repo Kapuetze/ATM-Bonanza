@@ -22,6 +22,12 @@ public class CustomerController : MonoBehaviour
     private Transform spawnPoint;
 
     /// <summary>
+    /// All available money deposits with customers
+    /// </summary>
+    [SerializeField]
+    private GameObject[] moneyDeposits;
+
+    /// <summary>
     /// The currently waiting customers
     /// </summary>
     private List<GameObject> currentCustomers = new List<GameObject>();
@@ -59,6 +65,11 @@ public class CustomerController : MonoBehaviour
     {
         currentCustomers.Add(Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity));
     }
+
+    //private MoneyDeposit FindFreeDeposit()
+    //{
+
+    //}
 
     /// <summary>
     /// Removes one customer from the waiting customers
