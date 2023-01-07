@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1785170113261549099}
   - component: {fileID: 1785170113261549102}
   m_Layer: 0
-  m_Name: MoneyDeposit
+  m_Name: MoneyDispenser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

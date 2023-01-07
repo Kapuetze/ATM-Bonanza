@@ -2883,7 +2883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1785170113261549098, guid: 267f83ee7d0c20644bfa2cdb31b87c24, type: 3}
       propertyPath: m_Name
-      value: MoneyDeposit
+      value: MoneyDispenser
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 267f83ee7d0c20644bfa2cdb31b87c24, type: 3}
@@ -2944,6 +2944,14 @@ PrefabInstance:
       objectReference: {fileID: 1014371644}
     - target: {fileID: 3202898128522713139, guid: 927aa698fe3c7404d9eddc7cfca54784, type: 3}
       propertyPath: moneyDeposit
+      value: 
+      objectReference: {fileID: 1487482712}
+    - target: {fileID: 3202898128522713139, guid: 927aa698fe3c7404d9eddc7cfca54784, type: 3}
+      propertyPath: moneyDispensers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202898128522713139, guid: 927aa698fe3c7404d9eddc7cfca54784, type: 3}
+      propertyPath: moneyDispensers.Array.data[0]
       value: 
       objectReference: {fileID: 1487482712}
     - target: {fileID: 3202898128522713292, guid: 927aa698fe3c7404d9eddc7cfca54784, type: 3}

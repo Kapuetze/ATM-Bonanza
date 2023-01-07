@@ -12,7 +12,7 @@ using static UnityEditor.Progress;
 [RequireComponent(typeof(Collider2D))]
 public class Inventory : MonoBehaviour
 {
-    MoneyDeposit currentDepositZone = null;
+    MoneyDispenser currentDispenserZone = null;
     int currentItem = 0;
 
     private Dictionary<Denomination, int> moneyBag = new Dictionary<Denomination, int>();
@@ -34,11 +34,14 @@ public class Inventory : MonoBehaviour
             SwitchCurrentItem((int)Input.mouseScrollDelta.y);
         }
 
-        // Interact with F
-        //if (Input.GetKeyDown(KeyCode.F))
-        //{
-        //    currentDepositZone.Customer
-        //}
+        //Interact with F
+        if (Input.GetKeyDown(KeyCode.F) && GetCurrentSelectedItem() != null && currentDispenserZone != null)
+        {
+            Denomination denomination = GetCurrentSelectedItem().Value;
+            currentDispenserZone.customer.GetComponent<Customer>().TakeCash((int)denomination);
+
+            RemoveBill(denomination);
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -55,19 +58,17 @@ public class Inventory : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
-        MoneyDeposit deposit;
-        if (collider.gameObject.TryGetComponent<MoneyDeposit>(out deposit))
+        if (collider.gameObject.TryGetComponent<MoneyDispenser>(out MoneyDispenser dispenser))
         {
-            currentDepositZone = deposit;
+            currentDispenserZone = dispenser;
         }
     }
 
     public void OnTriggerExit2D(Collider2D collider)
     {
-        MoneyDeposit deposit;
-        if (collider.gameObject.TryGetComponent<MoneyDeposit>(out deposit))
+        if (collider.gameObject.TryGetComponent<MoneyDispenser>(out MoneyDispenser dispenser))
         {
-            currentDepositZone = null;
+            currentDispenserZone = null;
         }
     }
 
@@ -89,6 +90,21 @@ public class Inventory : MonoBehaviour
         {
             RemoveSelectedItem();
         }
+    }
+
+    /// <summary>
+    /// Get the currently selected denomination or null if nothing is selected
+    /// </summary>
+    /// <returns></returns>
+    private Denomination? GetCurrentSelectedItem()
+    {
+        Denomination? result = null;
+        if (moneyBag.Count > 0)
+        {
+            result = moneyBag.ElementAt(currentItem).Key;
+        }
+
+        return result;
     }
 
     /// <summary>
