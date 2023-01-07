@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Player2D : MonoBehaviour
 {
@@ -19,9 +20,10 @@ public class Player2D : MonoBehaviour
     private Animator anim;
     private Vector3 velocity;
     private float grav = -9.81f;
-    public float currentDrag = 1f;
-    public float airtime = 0f;
+    private float currentDrag = 1f;
+    private float airtime = 0f;
     private float x;
+    public bool disableControls = false;
     private bool isGrounded = true;
     private bool doubleJumpReady = true;
     // Start is called before the first frame update
@@ -53,24 +55,26 @@ public class Player2D : MonoBehaviour
 
         #endregion
         #region Jumping
+        if(!disableControls)
+        {
+            if (Input.GetButton("Jump"))
+            {
+                rb.gravityScale = dynamicGravMultiplier.x;
+            }
+            else
+            {
+                rb.gravityScale = dynamicGravMultiplier.z;
+            }
 
-        if (Input.GetButton("Jump"))
-        {
-            rb.gravityScale = dynamicGravMultiplier.x;
-        }
-        else
-        {
-            rb.gravityScale = dynamicGravMultiplier.z;
-        }
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            Jump();
-        }
-        else if(Input.GetButtonDown("Jump") && !isGrounded && doubleJumpReady)
-        {
-            Jump();
-            doubleJumpReady = false;
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                Jump();
+            }
+            else if (Input.GetButtonDown("Jump") && !isGrounded && doubleJumpReady)
+            {
+                Jump();
+                doubleJumpReady = false;
+            }
         }
         #endregion
 
@@ -81,7 +85,7 @@ public class Player2D : MonoBehaviour
         }
         #endregion
 
-        rb.velocity = new Vector2(x * speed * Time.deltaTime, rb.velocity.y);
+        if(!disableControls) rb.velocity = new Vector2(x * speed * Time.deltaTime, rb.velocity.y);
     }
 
     public void ForceJump(float tempHeight)
@@ -93,9 +97,22 @@ public class Player2D : MonoBehaviour
         jumpHeight = temp;
     }
 
+    public Rigidbody2D GetRigidbody()
+    {
+        return rb;
+    }
+
+    public void GoRagdoll()
+    {
+        disableControls = true;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
     public void StandUp()
     {
-        
+        disableControls = false;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        transform.DORotate(Vector3.zero, 0.5f);
     }
 
     private void Jump()
@@ -118,11 +135,11 @@ public class Player2D : MonoBehaviour
             rb.gravityScale = dynamicGravMultiplier.y;
         }
 
-        if (x != 0)
+        if (x != 0 && !disableControls)
         {
             anim.SetInteger("State", 1);
         }
-        if (x == 0)
+        if (x == 0 && !disableControls)
         {
             anim.SetInteger("State", 0);
         }

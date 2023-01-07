@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class Hazard : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    protected Collision2D currentCollision;
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        Player2D player;
+        if (collision.collider.TryGetComponent<Player2D>(out player))
+        {
+            currentCollision = collision;
+            OnCollisionWithPlayer(player);
+            print("Hit player");
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void OnCollisionWithPlayer(Player2D player)
     {
-        
+
     }
 }
