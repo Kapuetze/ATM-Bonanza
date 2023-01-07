@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 [RequireComponent(typeof(Collider2D))]
 public class Inventory : MonoBehaviour
@@ -14,12 +17,13 @@ public class Inventory : MonoBehaviour
 
     private Dictionary<Denomination, int> moneyBag = new Dictionary<Denomination, int>();
 
-    private GameObject selectedItem;
+    [SerializeField]
+    private GameObject selectedMoneyIcon;
 
     // Start is called before the first frame update
     void Awake()
     {
-        selectedItem = transform.Find("MoneyIcon").gameObject;
+
     }
 
     // Update is called once per frame
@@ -77,9 +81,9 @@ public class Inventory : MonoBehaviour
         currentItem = Mathf.Clamp(currentItem, 0, moneyBag.Count - 1);
         if (moneyBag.Count > 0)
         {
-            Denomination current = moneyBag.ElementAt(currentItem).Key;
+            var element = moneyBag.ElementAt(currentItem);
             // Display currently selected item in the UI
-            SetSelectedItem(current);
+            SetSelectedItem(element.Key, element.Value);
         }
         else
         {
@@ -130,9 +134,18 @@ public class Inventory : MonoBehaviour
     /// </summary>
     /// <param name="currentDenomination"></param>
     /// <exception cref="NotImplementedException"></exception>
-    void SetSelectedItem(Denomination currentDenomination)
+    void SetSelectedItem(Denomination currentDenomination, int amount)
     {
-        throw new NotImplementedException();
+        if (!selectedMoneyIcon.activeInHierarchy)
+            selectedMoneyIcon.SetActive(true);
+
+        // Get the color from enumeration description
+        string hexColor = currentDenomination.GetDescription();
+        ColorUtility.TryParseHtmlString(hexColor, out Color color);
+        selectedMoneyIcon.GetComponent<Image>().color = color;
+
+        // Change the text to the current amount
+        selectedMoneyIcon.transform.Find("MoneyText").GetComponent<TMP_Text>().text = amount.ToString();
     }
 
     /// <summary>
@@ -142,6 +155,6 @@ public class Inventory : MonoBehaviour
     /// <exception cref="NotImplementedException"></exception>
     void RemoveSelectedItem()
     {
-        throw new NotImplementedException();
+        selectedMoneyIcon.SetActive(false);
     }
 }
