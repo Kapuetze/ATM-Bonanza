@@ -14,8 +14,11 @@ public enum Denomination
     Twenty = 20,
     [Description("#56FF74")]
     Fifty = 50,
-    Onehundred = 100, 
-    Twohundred = 200, 
+    [Description("#37e302")]
+    Onehundred = 100,
+    [Description("#e1eb34")]
+    Twohundred = 200,
+    [Description("#eb34d5")]
     Fivehundred = 500
 }
 
