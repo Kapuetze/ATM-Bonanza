@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 1166906162}
   - component: {fileID: 1166906161}
   - component: {fileID: 1166906160}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 1166906158}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 43f67efd4082a89458db0cf2e003df51, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -920,6 +920,7 @@ GameObject:
   - component: {fileID: 1218405181}
   - component: {fileID: 1218405180}
   - component: {fileID: 1218405179}
+  - component: {fileID: 1218405183}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -943,11 +944,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 43f67efd4082a89458db0cf2e003df51, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1218405180
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1041,6 +1042,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1218405183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218405178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f62f95f298c299488dbfe752b4d4e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 700
+  jumpHeight: 4
+  groundCheckSize: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1952718003
 GameObject:
   m_ObjectHideFlags: 0
