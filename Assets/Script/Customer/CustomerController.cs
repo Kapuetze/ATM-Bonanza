@@ -14,7 +14,7 @@ public class CustomerController : MonoBehaviour
     /// The customer gameobject
     /// </summary>
     [SerializeField]
-    private GameObject customerPrefab;
+    private List<GameObject> customerPrefabs = new List<GameObject>();
 
     /// <summary>
     /// Point where the customer spawns
@@ -66,7 +66,7 @@ public class CustomerController : MonoBehaviour
         GameObject dispenser = GetFreeDispenser();
         if (dispenser != null)
         {
-            GameObject newCustomer = Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity);
+            GameObject newCustomer = Instantiate(GetRandomCustomerPRefab(), spawnPoint.position, Quaternion.identity);
             currentCustomers.Add(newCustomer);
             dispenser.GetComponent<MoneyDispenser>().customer = newCustomer;
         }
@@ -93,5 +93,11 @@ public class CustomerController : MonoBehaviour
 
         // Spawn a new customer if necessary
         SpawnCustomer();
+    }
+
+    private GameObject GetRandomCustomerPRefab()
+    {
+        int rand = Random.Range(0, customerPrefabs.Count);
+        return customerPrefabs[rand];
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Customer : MonoBehaviour
 {
+    public CustomerController cc;
+
     /// <summary>
     /// How much money does the customer want
     /// </summary>
