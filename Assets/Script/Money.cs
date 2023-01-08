@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public enum Denomination 
 {
@@ -53,7 +54,10 @@ public class Money : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Get the color from enumeration description
+        string hexColor = denomination.GetDescription();
+        ColorUtility.TryParseHtmlString(hexColor, out Color color);
+        GetComponent<SpriteRenderer>().color = color;
     }
 
     // Update is called once per frame

@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f62f95f298c299488dbfe752b4d4e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3000
+  speed: 500
   jumpHeight: 5
   airDrag: 2
   dragCurve:
@@ -190,8 +190,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  currentDrag: 1
-  airtime: 0
+  disableControls: 0
 --- !u!1 &6191787849594888966
 GameObject:
   m_ObjectHideFlags: 0
