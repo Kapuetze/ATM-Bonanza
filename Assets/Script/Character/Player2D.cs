@@ -5,13 +5,21 @@ using DG.Tweening;
 
 public class Player2D : MonoBehaviour
 {
+    [Header("Jump")]
     public float speed = 12f;
     public float jumpHeight = 4f;
     public float airDrag = 2f;
+    [Header("Dash")]
+    public KeyCode dashButton = KeyCode.LeftShift;
+    public ParticleSystem dashEffect;
+    public float dashDuration = 0.2f;
+    public float dashPower = 3f;
+    public float dashAlignmentOffset = 90f;
+    [Header("Drag and Gravity")]
     public AnimationCurve dragCurve;
     [Tooltip("x = minimum multiplier applied to gravity while jumping and pressing jump. y = medium multiplier. z = maximum multiplier while falling.")]
     public Vector3 dynamicGravMultiplier = Vector3.one; 
-
+    [Header("Ground Check")]
     public float groundCheckSize = 0.4f;
     public LayerMask groundMask;
 
@@ -23,9 +31,10 @@ public class Player2D : MonoBehaviour
     private float currentDrag = 1f;
     private float airtime = 0f;
     private float x;
-    public bool disableControls = false;
+    private bool disableControls = false;
     private bool isGrounded = true;
     private bool doubleJumpReady = true;
+    private bool dashReady = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,9 +86,14 @@ public class Player2D : MonoBehaviour
             }
         }
         #endregion
-
+        #region Dashing
+        if(Input.GetKeyDown(dashButton) && dashReady && !disableControls)
+        {
+            StartCoroutine(Dash());
+        }
+        #endregion
         #region falling
-        if(!isGrounded && rb.velocity.y < 0)
+        if (!isGrounded && rb.velocity.y < 0)
         {
             print("falling");
         }
@@ -108,15 +122,44 @@ public class Player2D : MonoBehaviour
 
     public void GoRagdoll()
     {
+        coll.sharedMaterial.bounciness = 0.5f;
+        coll.sharedMaterial.friction = 0.7f;
         disableControls = true;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public void StandUp()
     {
+        coll.sharedMaterial.bounciness = 0f;
+        coll.sharedMaterial.friction = 0f;
         disableControls = false;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         transform.DORotate(Vector3.zero, 0.5f);
+    }
+
+    private IEnumerator Dash()
+    {
+        dashReady = false;
+        anim.SetInteger("State", 3);
+        dashEffect.Play();
+
+        Vector2 targetDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if (targetDirection == Vector2.zero) targetDirection = Vector2.up;
+        Vector2 target = targetDirection * transform.position;
+        GoRagdoll();
+        // Calculate the angle between the object's position and the mouse position
+        float angle = Mathf.Atan2(
+            target.y - transform.position.y,
+            target.x - transform.position.x
+        ) * Mathf.Rad2Deg;
+        angle += dashAlignmentOffset;
+        // Rotate the object to face the mouse cursor
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, angle);
+        rb.velocity = Vector2.zero;
+        rb.AddForce(targetDirection.normalized * dashPower, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(dashDuration);
+        StandUp();
+        dashEffect.Stop();
     }
 
     private void Jump()
@@ -130,6 +173,7 @@ public class Player2D : MonoBehaviour
     {
         doubleJumpReady = true;
         isGrounded = true;
+        dashReady = true;
         airtime = 0f;
         currentDrag = 1f;
 
@@ -151,7 +195,8 @@ public class Player2D : MonoBehaviour
 
     private void Airborn()
     {
-        anim.SetInteger("State", 2);
+        // Hacked for the dash
+        if(anim.GetInteger("State") != 3)anim.SetInteger("State", 2);
         isGrounded = false;
         currentDrag = dragCurve.Evaluate(airtime);
         currentDrag = Mathf.Clamp(currentDrag, 1f, airDrag);

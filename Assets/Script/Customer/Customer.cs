@@ -41,7 +41,7 @@ public class Customer : MonoBehaviour
         // Determine how much money the customer wants
         var enumArray = Enum.GetValues(typeof(Denomination));
         requestedCash = (int)enumArray.GetValue(Random.Range(0, enumArray.Length));
-        timer = requestedCash;
+        timer = requestedCash*10;
 
         requestedMoneyText.text = requestedCash.ToString();
 

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GrowSpot : MonoBehaviour
 {
-    public GameObject money;
+    #nullable enable
+    public Money? money;
+    #nullable disable
     public Vector3 position;
     public float cooldown = 0f;
 

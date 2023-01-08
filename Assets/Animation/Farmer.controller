@@ -172,7 +172,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: State
-    m_EventTreshold: 2
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -341942803020492141}
   m_Solo: 0
@@ -270,7 +270,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Farmer_Dash
-  m_Speed: 0.4
+  m_Speed: 0.1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -807917564365820785}
