@@ -66,11 +66,6 @@ public class Money : MonoBehaviour
         collider = GetComponent<CapsuleCollider2D>();
         collider.enabled = false;
 
-        foreach(var c in enumArray)
-        {
-            print(c);
-        }
-
         InvokeRepeating("Grow", GROW_INTERVAL, GROW_INTERVAL);
     }
 

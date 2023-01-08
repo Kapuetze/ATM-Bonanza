@@ -83,8 +83,6 @@ public class TreeLogic : MonoBehaviour
                 if(growSpot.money != null)
                 {
                     currentDistance = Vector3.Distance(growSpot.money.transform.position, position);
-                    print(currentDistance);
-                    print("Min: " + minDistance);
                     if(currentDistance < minDistance)
                     {
                         minDistance = currentDistance;
