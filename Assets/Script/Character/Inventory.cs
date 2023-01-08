@@ -11,7 +11,6 @@ public class Inventory : MonoBehaviour
     int currentItem = -1;
 
     private Dictionary<Denomination, int> moneyBag = new Dictionary<Denomination, int>();
-
     [SerializeField]
     private GameObject selectedMoneyIcon;
     [SerializeField]

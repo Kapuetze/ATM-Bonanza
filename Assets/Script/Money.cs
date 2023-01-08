@@ -100,7 +100,7 @@ public class Money : MonoBehaviour
         }
     }
 
-    private void ApplyDenomination()
+    public void ApplyDenomination()
     {
         // Get the color from enumeration description
         string hexColor = denomination.GetDescription();
