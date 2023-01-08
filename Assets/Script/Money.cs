@@ -51,8 +51,8 @@ public class Money : MonoBehaviour
     public Denomination denomination = Denomination.Five;
     public int GROW_INTERVAL = 10;
 
-    private Rigidbody2D rigidbody;
-    private CapsuleCollider2D collider;
+    private Rigidbody2D rb;
+    private CapsuleCollider2D coll;
     private System.Array enumArray = Enum.GetValues(typeof(Denomination));
 
     // Start is called before the first frame update
@@ -60,10 +60,10 @@ public class Money : MonoBehaviour
     {
         ApplyDenomination();
 
-        rigidbody = GetComponent<Rigidbody2D>();
-        rigidbody.simulated = false;
-        collider = GetComponent<CapsuleCollider2D>();
-        collider.enabled = false;
+        rb = GetComponent<Rigidbody2D>();
+        rb.simulated = false;
+        coll = GetComponent<CapsuleCollider2D>();
+        coll.enabled = false;
 
         InvokeRepeating("Grow", GROW_INTERVAL, GROW_INTERVAL);
     }
@@ -96,8 +96,8 @@ public class Money : MonoBehaviour
 
     public void StopGrowing()
     {
-        collider.enabled = true;
-        rigidbody.simulated = true;
+        coll.enabled = true;
+        rb.simulated = true;
         CancelInvoke();
     }
 }
