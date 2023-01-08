@@ -31,10 +31,19 @@ public class Customer : MonoBehaviour
 
     private TMP_Text requestedMoneyText;
     private GameController gameController;
+    private AudioSource audio;
+
+    [SerializeField]
+    private AudioClip successSound;
+    [SerializeField]
+    private AudioClip errorSound;
+    [SerializeField]
+    private AudioClip finishSound;
 
     void Awake()
     {
         requestedMoneyText = transform.Find("Canvas/RequestedMoney").GetComponentInChildren<TMP_Text>();
+        audio = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -81,13 +90,20 @@ public class Customer : MonoBehaviour
                 GameController.instance.AddScore(requestedCash);
 
                 // TODO: Play cash sound effect
+                audio.PlayOneShot(finishSound);
 
                 Leave();
             }
+            else
+            {
+                audio.PlayOneShot(successSound);
+            }
+
             return true;
         }
         else
         {
+            audio.PlayOneShot(errorSound);
             return false;
         }
     }
