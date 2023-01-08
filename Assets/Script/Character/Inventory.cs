@@ -1,13 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 [RequireComponent(typeof(Collider2D))]
 public class Inventory : MonoBehaviour
