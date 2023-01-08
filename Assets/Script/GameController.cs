@@ -89,6 +89,7 @@ public class GameController : MonoBehaviour
     public void StartLevel()
     {
         // Spawn the first customer
+        ResumeLevel();
     }
 
     /// <summary>
@@ -96,7 +97,24 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void RestartLevel()
     {
+        ResumeLevel();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>
+    /// Pause the game
+    /// </summary>
+    public void PauseLevel()
+    {
+        Time.timeScale = 0;
+    }
+
+    /// <summary>
+    /// Resume the game
+    /// </summary>
+    public void ResumeLevel()
+    {
+        Time.timeScale = 1;
     }
 
     /// <summary>
@@ -105,6 +123,7 @@ public class GameController : MonoBehaviour
     public void EndLevel()
     {
         // Game is over
+        PauseLevel();
         UIController.instance.ShowEndScreen(score);
     }
 

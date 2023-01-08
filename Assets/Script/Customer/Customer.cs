@@ -43,6 +43,8 @@ public class Customer : MonoBehaviour
     private AudioClip errorSound;
     [SerializeField]
     private AudioClip finishSound;
+    [SerializeField]
+    private AudioClip needMoneySound;
 
     void Awake()
     {
@@ -124,6 +126,7 @@ public class Customer : MonoBehaviour
             hasWalkedIn = true;
             // For now we disabled automatic timer leave
             timer = Int32.MaxValue;
+            audio.PlayOneShot(needMoneySound);
         });
     }
 

@@ -340,6 +340,7 @@ MonoBehaviour:
   successSound: {fileID: 8300000, guid: ce0454e7a476f3044bf166d206a88f38, type: 3}
   errorSound: {fileID: 8300000, guid: aaed89c9b602fb8489221a39112f64bb, type: 3}
   finishSound: {fileID: 8300000, guid: 0baae9b7f82717a41b132cf511843368, type: 3}
+  needMoneySound: {fileID: 8300000, guid: 5f3a537aac9d4d94d9e83986f2f325e1, type: 3}
 --- !u!82 &8110014361660383220
 AudioSource:
   m_ObjectHideFlags: 0
@@ -349,10 +350,10 @@ AudioSource:
   m_GameObject: {fileID: 4866227191757501081}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 51422e196971dad41a6498561a2ed6a1, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
