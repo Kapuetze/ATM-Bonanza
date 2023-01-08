@@ -77,7 +77,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3907068f08604b4c8b2d60358477ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerPrefab: {fileID: 4866227191757501081, guid: d18ce22d3939a514ca93aefcedf3a699, type: 3}
+  customerPrefabs:
+  - {fileID: 6749591401741860142, guid: 7cea2f1ecb563af49b743811fd496d41, type: 3}
+  - {fileID: 2651926460477889341, guid: 2686c3722966127449c7eaaefc71ed87, type: 3}
+  - {fileID: 551648027135389758, guid: 6bbd224218b4b4d4a854b6c5e8bc948f, type: 3}
+  - {fileID: 2319690778308966834, guid: 3c5af98d057f6d745a3941a3e7835b93, type: 3}
   customerSpawnPoint: {fileID: 4537719156688269418}
   currentCustomer: {fileID: 0}
 --- !u!1001 &3417259982684742250
@@ -90,6 +94,14 @@ PrefabInstance:
     - target: {fileID: 1785170113261549097, guid: 267f83ee7d0c20644bfa2cdb31b87c24, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785170113261549097, guid: 267f83ee7d0c20644bfa2cdb31b87c24, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785170113261549097, guid: 267f83ee7d0c20644bfa2cdb31b87c24, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1785170113261549097, guid: 267f83ee7d0c20644bfa2cdb31b87c24, type: 3}
       propertyPath: m_LocalPosition.x
