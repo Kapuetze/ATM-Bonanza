@@ -137,4 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   denomination: 5
-  GROW_INTERVAL: 10
+  GROW_INTERVAL: 5

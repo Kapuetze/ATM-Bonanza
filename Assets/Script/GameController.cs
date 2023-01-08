@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     /// </summary>
     public static GameController instance;
 
+    public List<Difficulty> difficulties = new List<Difficulty>();
+
     /// <summary>
     /// Total of how many customers are going to come
     /// </summary>
