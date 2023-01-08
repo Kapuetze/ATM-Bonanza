@@ -48,6 +48,11 @@ public class GameController : MonoBehaviour
     /// </summary>
     float timeLeft;
 
+    /// <summary>
+    /// Game is currently paused
+    /// </summary>
+    bool isPaused;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -74,13 +79,16 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0)
+        if (!isPaused)
         {
-            EndLevel();
-        }
+            timeLeft -= Time.deltaTime;
+            if (timeLeft <= 0)
+            {
+                EndLevel();
+            }
 
-        UIController.instance.SetTimer((int)timeLeft);
+            UIController.instance.SetTimer((int)timeLeft);
+        }
     }
 
     /// <summary>
@@ -107,6 +115,7 @@ public class GameController : MonoBehaviour
     public void PauseLevel()
     {
         Time.timeScale = 0;
+        isPaused = true;
     }
 
     /// <summary>
@@ -115,6 +124,7 @@ public class GameController : MonoBehaviour
     public void ResumeLevel()
     {
         Time.timeScale = 1;
+        isPaused = false;
     }
 
     /// <summary>
