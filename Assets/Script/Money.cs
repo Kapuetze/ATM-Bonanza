@@ -50,9 +50,49 @@ public static class EnumHelper
 public class Money : MonoBehaviour
 {
     public Denomination denomination = Denomination.Five;
+    public int GROW_INTERVAL = 10;
+
+    private Rigidbody2D rigidbody;
+    private CapsuleCollider2D collider;
+    private System.Array enumArray = Enum.GetValues(typeof(Denomination));
 
     // Start is called before the first frame update
     void Start()
+    {
+        ApplyDenomination();
+
+        rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody.simulated = false;
+        collider = GetComponent<CapsuleCollider2D>();
+        collider.enabled = false;
+
+        foreach(var c in enumArray)
+        {
+            print(c);
+        }
+
+        InvokeRepeating("Grow", GROW_INTERVAL, GROW_INTERVAL);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void Grow()
+    {
+        int currIndex = Array.IndexOf(enumArray, denomination);
+        denomination = (Denomination) enumArray.GetValue(currIndex + 1);
+        ApplyDenomination();
+
+        if(currIndex + 1 == enumArray.Length - 1)
+        {
+            CancelInvoke();
+        }
+    }
+
+    private void ApplyDenomination()
     {
         // Get the color from enumeration description
         string hexColor = denomination.GetDescription();
@@ -60,9 +100,10 @@ public class Money : MonoBehaviour
         GetComponent<SpriteRenderer>().color = color;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StopGrowing()
     {
-        
+        collider.enabled = true;
+        rigidbody.simulated = true;
+        CancelInvoke();
     }
 }

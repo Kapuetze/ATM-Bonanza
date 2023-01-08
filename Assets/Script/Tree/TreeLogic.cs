@@ -15,7 +15,10 @@ public class TreeLogic : MonoBehaviour
     private GameObject moneyPrefab;
 
     private bool harvestAllowed = false;
+
+    #nullable enable
     private GameObject? player;
+    #nullable disable
 
     // Start is called before the first frame update
     void Start()
@@ -57,21 +60,22 @@ public class TreeLogic : MonoBehaviour
             // Check if grow spot is empty and cooldown exceeded
             if(!growSpot.money && (growSpot.cooldown == 0f || Time.time > growSpot.cooldown))
             {
-                growSpot.money = Instantiate(moneyPrefab, growSpot.transform);
-                growSpot.money.GetComponent<CapsuleCollider2D> ().enabled = false;
-                growSpot.money.GetComponent<Rigidbody2D>().isKinematic = true;
+                growSpot.money = Instantiate(moneyPrefab, growSpot.transform).GetComponent<Money>();
             }
         }
     }
 
     public void HarvestTree()
     {
-        if(harvestAllowed == true && player != null)
+        if(harvestAllowed == true)
         {
             Vector3 position = player.transform.position;
 
-            float minDistance = Mathf.Infinity;
+            #nullable enable
             GrowSpot? closestGrowSpot = null;
+            #nullable disable
+
+            float minDistance = Mathf.Infinity;
             float currentDistance = 0f;
             // Find the growSpot that is closest to the player position
             foreach (GrowSpot growSpot in spots)
@@ -91,8 +95,7 @@ public class TreeLogic : MonoBehaviour
 
             if(closestGrowSpot != null)
             {
-                closestGrowSpot.money.GetComponent<CapsuleCollider2D> ().enabled = true;
-                closestGrowSpot.money.GetComponent<Rigidbody2D>().isKinematic = false;
+                closestGrowSpot.money.StopGrowing();
                 closestGrowSpot.money = null;
                 closestGrowSpot.cooldown = Time.time + GROW_SPOT_COOLDOWN;
             }
