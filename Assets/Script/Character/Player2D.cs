@@ -85,6 +85,10 @@ public class Player2D : MonoBehaviour
         }
         #endregion
 
+    }
+
+    private void FixedUpdate()
+    {
         if(!disableControls) rb.velocity = new Vector2(x * speed * Time.deltaTime, rb.velocity.y);
     }
 
