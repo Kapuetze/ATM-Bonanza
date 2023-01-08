@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb135741c9ebef74894270b3fc30738f, type: 3}
   m_Name: Medium
   m_EditorClassIdentifier: 
-  maxRequestedAmount: 500
+  maxRequestedAmount: 200
+  minRequestedAmount: 20
   patienceMultiplier: 5

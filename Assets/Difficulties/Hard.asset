@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb135741c9ebef74894270b3fc30738f, type: 3}
   m_Name: Hard
   m_EditorClassIdentifier: 
-  maxRequestedAmount: 1000
+  maxRequestedAmount: 400
+  minRequestedAmount: 50
   patienceMultiplier: 2
