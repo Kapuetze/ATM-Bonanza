@@ -182,7 +182,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112569614}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7804121816912499591, guid: 7be1c254b8a12f64b8b0509d97d3ea34, type: 3}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: NavigteInstructions
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1378,6 +1378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 552117184}
   - component: {fileID: 552117185}
+  - component: {fileID: 552117186}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1458,7 +1459,32 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 552117186}
+        m_TargetAssemblyTypeName: SetMusicVolume, Assembly-CSharp
+        m_MethodName: SetLevel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &552117186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552117183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4499453ccaa369d45840a635eb6c62f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: a98efe3bb2ef4c4499e5ab8c9dc71305, type: 2}
 --- !u!1 &613221378
 GameObject:
   m_ObjectHideFlags: 0
@@ -2506,6 +2532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1409261839}
   - component: {fileID: 1409261840}
+  - component: {fileID: 1409261841}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -2586,7 +2613,32 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1409261841}
+        m_TargetAssemblyTypeName: SetSFXVolume, Assembly-CSharp
+        m_MethodName: SetLevel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1409261841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409261838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2d80f3195f2c040b23045a45af758a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 51422e196971dad41a6498561a2ed6a1, type: 2}
 --- !u!1 &1504868307
 GameObject:
   m_ObjectHideFlags: 0

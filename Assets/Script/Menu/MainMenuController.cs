@@ -17,7 +17,7 @@ public class MainMenuController : MonoBehaviour
     void Awake()
     {
         SettingsCanvas.SetActive(false);
-        InstructionsCanvas.SetActive(false);
+        MainMenuCanvas.SetActive(false);
     }
 
     // Start is called before the first frame update
