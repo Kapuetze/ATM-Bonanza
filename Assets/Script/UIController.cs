@@ -70,7 +70,7 @@ public class UIController : MonoBehaviour
     /// <param name="score"></param>
     public void SetTimer(int timer)
     {
-        timerText.text = timer.ToString();
+        timerText.text = new TimeSpan(0, 0, timer).ToString("mm\\:ss");
     }
 
     /// <summary>

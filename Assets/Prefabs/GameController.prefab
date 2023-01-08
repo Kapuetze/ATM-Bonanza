@@ -48,6 +48,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 524c5405d1761314d86c2da1d79e83ac, type: 2}
   - {fileID: 11400000, guid: aa8c2023e4ab62f4291a576c32583d72, type: 2}
   - {fileID: 11400000, guid: bb0afcfdc1571034695911c3a76ff003, type: 2}
-  DIFFICULTY_INCREASE_INTERVAL: 150
   difficulty: {fileID: 0}
   maxCustomers: 0
+  maxTimer: 70
+  difficultyIncreaseInterval: 150
