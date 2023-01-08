@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class TreeLogic : MonoBehaviour
 {
-    private const float SPAWN_INTERVAL = 0.3f;
-    private const int GROW_SPOT_COUNT = 3;
-    private const float GROW_SPOT_COOLDOWN = 10.0f;
+    [SerializeField]
+    private float SPAWN_INTERVAL = 0.3f;
+    [SerializeField]
+    private float GROW_SPOT_COOLDOWN = 10.0f;
+
     public List<GrowSpot> spots = new List<GrowSpot>();
 
     [SerializeField]
     private GameObject moneyPrefab;
+
+    private bool harvestAllowed = false;
+    private GameObject? player;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +26,28 @@ public class TreeLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            HarvestTree();
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            player = collision.gameObject;
+            harvestAllowed = true;
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            player = null;
+            harvestAllowed = false;
+        }
     }
 
     void CheckTreeStatus()
@@ -32,16 +58,44 @@ public class TreeLogic : MonoBehaviour
             if(!growSpot.money && (growSpot.cooldown == 0f || Time.time > growSpot.cooldown))
             {
                 growSpot.money = Instantiate(moneyPrefab, growSpot.transform);
+                growSpot.money.GetComponent<CapsuleCollider2D> ().enabled = false;
+                growSpot.money.GetComponent<Rigidbody2D>().isKinematic = true;
             }
         }
     }
 
-    public void HarvestTree(Vector3 position)
+    public void HarvestTree()
     {
-        // Find the growSpot that is closest to the player position
-        foreach (GrowSpot growSpot in spots)
+        if(harvestAllowed == true && player != null)
         {
-            
+            Vector3 position = player.transform.position;
+
+            float minDistance = Mathf.Infinity;
+            GrowSpot? closestGrowSpot = null;
+            float currentDistance = 0f;
+            // Find the growSpot that is closest to the player position
+            foreach (GrowSpot growSpot in spots)
+            {
+                if(growSpot.money != null)
+                {
+                    currentDistance = Vector3.Distance(growSpot.money.transform.position, position);
+                    print(currentDistance);
+                    print("Min: " + minDistance);
+                    if(currentDistance < minDistance)
+                    {
+                        minDistance = currentDistance;
+                        closestGrowSpot = growSpot;
+                    }
+                }
+            }
+
+            if(closestGrowSpot != null)
+            {
+                closestGrowSpot.money.GetComponent<CapsuleCollider2D> ().enabled = true;
+                closestGrowSpot.money.GetComponent<Rigidbody2D>().isKinematic = false;
+                closestGrowSpot.money = null;
+                closestGrowSpot.cooldown = Time.time + GROW_SPOT_COOLDOWN;
+            }
         }
     }
 }
