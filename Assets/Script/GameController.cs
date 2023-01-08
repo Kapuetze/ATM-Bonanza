@@ -13,6 +13,10 @@ public class GameController : MonoBehaviour
 
     public List<Difficulty> difficulties = new List<Difficulty>();
 
+    public int DIFFICULTY_INCREASE_INTERVAL = 150;
+
+    public Difficulty difficulty;
+
     /// <summary>
     /// Total of how many customers are going to come
     /// </summary>
@@ -45,7 +49,9 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        difficulty = difficulties[0];
         StartLevel();
+        InvokeRepeating("IncreaseDifficulty", DIFFICULTY_INCREASE_INTERVAL, DIFFICULTY_INCREASE_INTERVAL);
     }
 
     // Update is called once per frame
@@ -88,6 +94,19 @@ public class GameController : MonoBehaviour
         {
             // Game is over
             UIController.instance.ShowEndScreen(score);
+        }
+    }
+
+    public void IncreaseDifficulty()
+    {
+        int currentIndex = difficulties.IndexOf(difficulty);
+        if(++currentIndex < difficulties.Count -1)
+        {
+            difficulty = difficulties[currentIndex];
+        }
+        else
+        {
+            CancelInvoke("IncreaseDifficulty");
         }
     }
 }

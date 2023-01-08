@@ -44,3 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b74ed789b0b544296e434edc7bd0a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulties:
+  - {fileID: 11400000, guid: 524c5405d1761314d86c2da1d79e83ac, type: 2}
+  - {fileID: 11400000, guid: aa8c2023e4ab62f4291a576c32583d72, type: 2}
+  - {fileID: 11400000, guid: bb0afcfdc1571034695911c3a76ff003, type: 2}
+  DIFFICULTY_INCREASE_INTERVAL: 150
+  difficulty: {fileID: 0}
+  maxCustomers: 0

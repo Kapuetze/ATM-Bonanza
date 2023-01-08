@@ -30,6 +30,7 @@ public class Customer : MonoBehaviour
     private CustomerController customerController;
 
     private TMP_Text requestedMoneyText;
+    private GameController gameController;
 
     void Awake()
     {
@@ -39,9 +40,11 @@ public class Customer : MonoBehaviour
     void Start()
     {
         // Determine how much money the customer wants
-        var enumArray = Enum.GetValues(typeof(Denomination));
-        requestedCash = (int)enumArray.GetValue(Random.Range(0, enumArray.Length));
-        timer = requestedCash*10;
+        gameController = GameController.instance;
+        requestedCash = Random.Range(gameController.difficulty.minRequestedAmount / 10 * 2, gameController.difficulty.maxRequestedAmount / 10 * 2) * 10 / 2;
+        print(requestedCash);
+        
+        timer = requestedCash * gameController.difficulty.patienceMultiplier;
 
         requestedMoneyText.text = requestedCash.ToString();
 
