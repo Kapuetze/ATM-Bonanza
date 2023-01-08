@@ -15,7 +15,10 @@ public class CustomerController : MonoBehaviour
     /// Point where the customer spawns
     /// </summary>
     [SerializeField]
-    private Transform customerSpawnPoint;
+    public Transform customerSpawnPoint;
+
+    [SerializeField]
+    public Transform customerDestinationPoint;
 
     /// <summary>
     /// The currently waiting customers
