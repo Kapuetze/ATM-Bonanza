@@ -49,7 +49,7 @@ public static class EnumHelper
 public class Money : MonoBehaviour
 {
     public Denomination denomination = Denomination.Five;
-    public int GROW_INTERVAL = 10;
+    public float GROW_INTERVAL = 10f;
 
     private Rigidbody2D rb;
     private CapsuleCollider2D coll;

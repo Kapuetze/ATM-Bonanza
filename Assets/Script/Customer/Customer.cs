@@ -66,11 +66,11 @@ public class Customer : MonoBehaviour
     /// Increase cash 
     /// </summary>
     /// <param name="cash"></param>
-    public void TakeCash(int cash)
+    public bool TakeCash(int cash)
     {
         receivedCash += cash;
         int cashDifference = requestedCash - receivedCash;
-        if(cashDifference > cashDifference)
+        if(cashDifference >= cash)
         {
             requestedMoneyText.text = cashDifference.ToString();
 
@@ -83,7 +83,9 @@ public class Customer : MonoBehaviour
 
                 Leave();
             }
+            return true;
         }
+        return false;
     }
 
     /// <summary>

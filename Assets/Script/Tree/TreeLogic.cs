@@ -23,7 +23,7 @@ public class TreeLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("CheckTreeStatus", SPAWN_INTERVAL, SPAWN_INTERVAL);
+        InvokeRepeating("CheckTreeStatus", GROW_SPOT_COOLDOWN, SPAWN_INTERVAL);
     }
 
     // Update is called once per frame
