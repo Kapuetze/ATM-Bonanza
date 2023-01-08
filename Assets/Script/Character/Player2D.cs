@@ -22,10 +22,13 @@ public class Player2D : MonoBehaviour
     [Header("Ground Check")]
     public float groundCheckSize = 0.4f;
     public LayerMask groundMask;
+    public AudioClip dashSound;
+    public AudioClip jumpSound;
 
     private Rigidbody2D rb;
     private Collider2D coll;
     private Animator anim;
+    private AudioSource audioSource;
     private Vector3 velocity;
     private float grav = -9.81f;
     private float currentDrag = 1f;
@@ -41,6 +44,7 @@ public class Player2D : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -142,6 +146,7 @@ public class Player2D : MonoBehaviour
         dashReady = false;
         anim.SetInteger("State", 3);
         dashEffect.Play();
+        audioSource.PlayOneShot(dashSound);
 
         float vertical = 0.0f;
         if(isGrounded == false)
@@ -178,6 +183,8 @@ public class Player2D : MonoBehaviour
         float jumpForce = Mathf.Sqrt(jumpHeight * -2f * ((grav * rb.gravityScale) * rb.gravityScale));
         rb.velocity = Vector2.zero;
         rb.velocity += Vector2.up * jumpForce;
+
+        audioSource.PlayOneShot(jumpSound);
     }
 
     private void BeGrounded()

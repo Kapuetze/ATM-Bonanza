@@ -139,7 +139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4496414834573369897}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0000010728836, y: 0, z: -10}
+  m_LocalPosition: {x: 9.750001, y: -6.34, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -394,6 +394,14 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 187505532488679757, guid: 94573b3cd67c66e45b99e3f0f3fffbe7, type: 3}
+      propertyPath: dashSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ac42b3bcc3c4bb149a4e0ce963932081, type: 3}
+    - target: {fileID: 187505532488679757, guid: 94573b3cd67c66e45b99e3f0f3fffbe7, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6b14d08a0e74a654a8487bcab8122014, type: 3}
+    - target: {fileID: 187505532488679757, guid: 94573b3cd67c66e45b99e3f0f3fffbe7, type: 3}
       propertyPath: dashDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -430,20 +438,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 187505532488679756, guid: 94573b3cd67c66e45b99e3f0f3fffbe7, type: 3}
   m_PrefabInstance: {fileID: 3938296905581636320}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9201521113549988188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3764309323641924524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1004fa65ffd1d8b489b53f4a8aee8e22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedMoneyIcon: {fileID: 2889253815769714620}
-  takeSound: {fileID: 8300000, guid: 41ef4c62490e45c438a1772dda91e5c2, type: 3}
 --- !u!82 &1560774902963477256
 AudioSource:
   m_ObjectHideFlags: 0
@@ -456,7 +450,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.65
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -540,6 +534,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9201521113549988188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3764309323641924524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1004fa65ffd1d8b489b53f4a8aee8e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedMoneyIcon: {fileID: 2889253815769714620}
+  takeSound: {fileID: 8300000, guid: 41ef4c62490e45c438a1772dda91e5c2, type: 3}
 --- !u!1001 &5257451621652577250
 PrefabInstance:
   m_ObjectHideFlags: 0
