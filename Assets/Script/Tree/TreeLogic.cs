@@ -10,6 +10,8 @@ public class TreeLogic : MonoBehaviour
     private float GROW_SPOT_COOLDOWN = 10.0f;
     [SerializeField]
     private float INITIAL_SPAWN_COOLDOWN = 5.0f;
+    [SerializeField]
+    private float WATER_TIMER_INCREASE = 0.1f;
 
     public List<GrowSpot> spots = new List<GrowSpot>();
 
@@ -63,6 +65,17 @@ public class TreeLogic : MonoBehaviour
             if(!growSpot.money && (growSpot.cooldown == 0f || Time.time > growSpot.cooldown))
             {
                 growSpot.money = Instantiate(moneyPrefab, growSpot.transform).GetComponent<Money>();
+            }
+        }
+    }
+
+    public void WaterTree()
+    {
+        foreach (GrowSpot growSpot in spots)
+        {
+            if (growSpot.money != null)
+            {
+                growSpot.money.IncreaseTimer(WATER_TIMER_INCREASE);
             }
         }
     }

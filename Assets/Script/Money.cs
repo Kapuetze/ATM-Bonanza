@@ -50,6 +50,8 @@ public class Money : MonoBehaviour
 {
     public Denomination denomination = Denomination.Five;
     public float GROW_INTERVAL = 10f;
+    public float timeUntilGrow = 0f;
+    public bool isGrowing = true;
 
     private Rigidbody2D rb;
     private CapsuleCollider2D coll;
@@ -64,14 +66,19 @@ public class Money : MonoBehaviour
         rb.simulated = false;
         coll = GetComponent<CapsuleCollider2D>();
         coll.enabled = false;
-
-        InvokeRepeating("Grow", GROW_INTERVAL, GROW_INTERVAL);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        
+        if(isGrowing)
+        {
+            timeUntilGrow += Time.deltaTime;
+            if (timeUntilGrow >= GROW_INTERVAL)
+            {
+                timeUntilGrow = 0f;
+                Grow();
+            }
+        }
     }
 
     private void Grow()
@@ -82,7 +89,7 @@ public class Money : MonoBehaviour
 
         if(currIndex + 1 == enumArray.Length - 1)
         {
-            CancelInvoke();
+            isGrowing = false;
         }
     }
 
@@ -98,6 +105,11 @@ public class Money : MonoBehaviour
     {
         coll.enabled = true;
         rb.simulated = true;
-        CancelInvoke();
+        isGrowing = false;
+    }
+
+    public void IncreaseTimer(float value)
+    {
+        timeUntilGrow += value;
     }
 }

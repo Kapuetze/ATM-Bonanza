@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Pump : MonoBehaviour
 {
+    public TreeLogic tree;
+    public ParticleSystem waterEffect;
     public float downWardLimit = 0.3f;
     public float speed = 1f;
     public bool release = true;
-    public float dist = 0f;
 
     private Player2D player;
     private Vector3 startPos;
+    private float dist = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,16 +22,23 @@ public class Pump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dist = Vector3.Distance(transform.position, transform.parent.position);
         if(release && transform.position != startPos)
         {
+            // Reset position
             transform.position = Vector3.Lerp(transform.position, startPos, speed);
         }
 
 
-        if (dist > downWardLimit && !release)
+        if (transform.localPosition.y > downWardLimit + 0.05f && !release)
         {
+            // Move handle down
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, downWardLimit, 0), speed);
+            tree.WaterTree();
+        }
+        else if(!release)
+        {
+            waterEffect.Stop();
+            print(downWardLimit + 0.05f);
         }
     }
 
@@ -37,6 +46,7 @@ public class Pump : MonoBehaviour
     {
         if(collision.collider.TryGetComponent<Player2D>(out player))
         {
+            waterEffect.Play();
             release = false;
         }
     }
@@ -45,6 +55,7 @@ public class Pump : MonoBehaviour
     {
         if (collision.collider.TryGetComponent<Player2D>(out player))
         {
+            waterEffect.Stop();
             release = true;
             player = null;
         }
