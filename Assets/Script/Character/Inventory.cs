@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
     MoneyDispenser currentDispenserZone = null;
 
     int currentItem = -1;
+    private bool indexPause = false;
 
     private Dictionary<Denomination, int> moneyBag = new Dictionary<Denomination, int>();
     [SerializeField]
@@ -30,6 +31,16 @@ public class Inventory : MonoBehaviour
         if (Input.mouseScrollDelta != Vector2.zero)
         {            
             SwitchCurrentItem((int)Input.mouseScrollDelta.y);
+        }
+
+        if (Input.GetAxisRaw("Vertical") != 0 && !indexPause)
+        {
+            SwitchCurrentItem((int)Input.GetAxisRaw("Vertical"));
+            indexPause = true;
+        }
+        else if(indexPause && Input.GetAxisRaw("Vertical") == 0)
+        {
+            indexPause = false;
         }
 
         //Interact with F
