@@ -55,6 +55,13 @@ public class Money : MonoBehaviour
     private CapsuleCollider2D coll;
     private System.Array enumArray = Enum.GetValues(typeof(Denomination));
 
+    private AudioSource audio;
+
+    private void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,6 +99,8 @@ public class Money : MonoBehaviour
         string hexColor = denomination.GetDescription();
         ColorUtility.TryParseHtmlString(hexColor, out Color color);
         GetComponent<SpriteRenderer>().color = color;
+
+        //audio.Play();
     }
 
     public void StopGrowing()

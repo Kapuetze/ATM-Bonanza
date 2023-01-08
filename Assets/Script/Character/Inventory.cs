@@ -14,11 +14,15 @@ public class Inventory : MonoBehaviour
 
     [SerializeField]
     private GameObject selectedMoneyIcon;
+    [SerializeField]
+    private AudioClip takeSound;
+
+    private AudioSource audio;
 
     // Start is called before the first frame update
     void Awake()
     {
-
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -51,6 +55,8 @@ public class Inventory : MonoBehaviour
             AddBill(other.denomination);
             // Destroy the money object
             Destroy(collision.gameObject);
+
+            audio.PlayOneShot(takeSound);
         }
     }
 

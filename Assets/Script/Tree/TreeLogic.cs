@@ -18,6 +18,8 @@ public class TreeLogic : MonoBehaviour
 
     private bool harvestAllowed = false;
 
+    private AudioSource audio;
+
     #nullable enable
     private GameObject? player;
     #nullable disable
@@ -25,6 +27,8 @@ public class TreeLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
+
         InvokeRepeating("CheckTreeStatus", GROW_SPOT_COOLDOWN, SPAWN_INTERVAL);
     }
 
@@ -98,6 +102,8 @@ public class TreeLogic : MonoBehaviour
                 closestGrowSpot.money.StopGrowing();
                 closestGrowSpot.money = null;
                 closestGrowSpot.cooldown = Time.time + GROW_SPOT_COOLDOWN;
+
+                audio.Play();
             }
         }
     }
