@@ -13,8 +13,6 @@ public class GameController : MonoBehaviour
 
     public List<Difficulty> difficulties = new List<Difficulty>();
 
-    public int DIFFICULTY_INCREASE_INTERVAL = 150;
-
     public Difficulty difficulty;
 
     /// <summary>
@@ -22,6 +20,18 @@ public class GameController : MonoBehaviour
     /// </summary>
     [SerializeField]
     int maxCustomers;
+
+    /// <summary>
+    /// Max game time
+    /// </summary>
+    [SerializeField]
+    int maxTimer;
+
+    /// <summary>
+    /// Time after which the game gets harder
+    /// </summary>
+    [SerializeField]
+    int difficultyIncreaseInterval = 150;
 
     /// <summary>
     /// How many customers have already left
@@ -32,6 +42,11 @@ public class GameController : MonoBehaviour
     /// The current score
     /// </summary>
     int score = 0;
+
+    /// <summary>
+    /// How much time is left in the game
+    /// </summary>
+    float timeLeft;
 
     // Start is called before the first frame update
     void Awake()
@@ -45,19 +60,27 @@ public class GameController : MonoBehaviour
         {
             Destroy(this);
         }
+
+        timeLeft = maxTimer;
     }
 
     void Start()
     {
         difficulty = difficulties[0];
         StartLevel();
-        InvokeRepeating("IncreaseDifficulty", DIFFICULTY_INCREASE_INTERVAL, DIFFICULTY_INCREASE_INTERVAL);
+        InvokeRepeating("IncreaseDifficulty", difficultyIncreaseInterval, difficultyIncreaseInterval);
     }
 
     // Update is called once per frame
     void Update()
     {
+        timeLeft -= Time.deltaTime;
+        if (timeLeft <= 0)
+        {
+            EndLevel();
+        }
 
+        UIController.instance.SetTimer((int)timeLeft);
     }
 
     /// <summary>
@@ -77,6 +100,15 @@ public class GameController : MonoBehaviour
     }
 
     /// <summary>
+    /// Ends the level and shows score
+    /// </summary>
+    public void EndLevel()
+    {
+        // Game is over
+        UIController.instance.ShowEndScreen(score);
+    }
+
+    /// <summary>
     /// Add score to the game score
     /// </summary>
     /// <param name="amount">The score amount to be added</param>
@@ -92,8 +124,7 @@ public class GameController : MonoBehaviour
         customersLeft++;
         if (customersLeft == maxCustomers)
         {
-            // Game is over
-            UIController.instance.ShowEndScreen(score);
+            EndLevel();
         }
     }
 

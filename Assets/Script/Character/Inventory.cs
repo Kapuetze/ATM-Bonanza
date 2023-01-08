@@ -149,6 +149,9 @@ public class Inventory : MonoBehaviour
         {
             moneyBag[denomination] -= 1;
 
+            // Update the selected item UI
+            SetSelectedItem(new Item { denomination = denomination, amount = moneyBag[denomination] });
+
             // Remove the whole key entry if it is 0
             if (moneyBag[denomination] == 0)
             {
