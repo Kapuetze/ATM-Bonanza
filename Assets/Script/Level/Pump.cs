@@ -14,6 +14,14 @@ public class Pump : MonoBehaviour
     private Vector3 startPos;
     private float dist = 0f;
     // Start is called before the first frame update
+
+    AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Start()
     {
         startPos = transform.position;
@@ -28,7 +36,6 @@ public class Pump : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, startPos, speed);
         }
 
-
         if (transform.localPosition.y > downWardLimit + 0.05f && !release)
         {
             // Move handle down
@@ -38,6 +45,9 @@ public class Pump : MonoBehaviour
         else if(!release)
         {
             waterEffect.Stop();
+            //if (audioSource.isPlaying)
+            //    audioSource.Stop();
+
             print(downWardLimit + 0.05f);
         }
     }
@@ -47,6 +57,9 @@ public class Pump : MonoBehaviour
         if(collision.collider.TryGetComponent<Player2D>(out player))
         {
             waterEffect.Play();
+            if (!audioSource.isPlaying)
+                audioSource.Play();
+
             release = false;
         }
     }
@@ -56,6 +69,10 @@ public class Pump : MonoBehaviour
         if (collision.collider.TryGetComponent<Player2D>(out player))
         {
             waterEffect.Stop();
+
+            //if (audioSource.isPlaying)
+            //    audioSource.Stop();
+
             release = true;
             player = null;
         }
