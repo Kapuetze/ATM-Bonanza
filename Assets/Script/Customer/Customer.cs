@@ -50,7 +50,7 @@ public class Customer : MonoBehaviour
     {
         // Determine how much money the customer wants
         gameController = GameController.instance;
-        requestedCash = Random.Range(gameController.difficulty.minRequestedAmount / 10 * 2, gameController.difficulty.maxRequestedAmount / 10 * 2) * 10 / 2;
+        requestedCash = Random.Range(gameController.difficulty.minRequestedAmount * 2 / 10, gameController.difficulty.maxRequestedAmount * 2 / 10) * 10 / 2;
         print(requestedCash);
         
         // Stay 30s on default + a dynamic amount for the money requested
