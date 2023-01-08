@@ -143,16 +143,27 @@ public class Player2D : MonoBehaviour
         anim.SetInteger("State", 3);
         dashEffect.Play();
 
-        Vector2 targetDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (targetDirection == Vector2.zero) targetDirection = Vector2.up;
-        Vector2 target = targetDirection * transform.position;
+        float vertical = 0.0f;
+        if(isGrounded == false)
+        {
+            vertical = 1.0f;
+        }
+
+        Vector2 targetDirection = new Vector2(Input.GetAxisRaw("Horizontal"), vertical);
+        
         GoRagdoll();
-        // Calculate the angle between the object's position and the mouse position
-        float angle = Mathf.Atan2(
-            target.y - transform.position.y,
-            target.x - transform.position.x
+        float angle;
+
+        float yDirection = targetDirection.y - transform.position.y;
+        float xDirection = targetDirection.x - transform.position.x;
+        if (yDirection < 0) yDirection *= -1;
+        angle = Mathf.Atan2(
+            yDirection,
+            xDirection
         ) * Mathf.Rad2Deg;
-        angle += dashAlignmentOffset;
+
+        angle -= dashAlignmentOffset;
+
         // Rotate the object to face the mouse cursor
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, angle);
         rb.velocity = Vector2.zero;
