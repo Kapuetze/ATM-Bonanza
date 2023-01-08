@@ -10,6 +10,10 @@ public class Customer : MonoBehaviour
 {
     public CustomerController cc;
     public float speed = 2.0f;
+    /// <summary>
+    /// How much extra time ist added to the time left. Servicing more customers will lead to a longer play time
+    /// </summary>
+    public float gameTimeAdditon = 3f;
 
     /// <summary>
     /// How much money does the customer want
@@ -92,7 +96,7 @@ public class Customer : MonoBehaviour
             {
                 // Punish the player if the received cash exceeds what was requested
                 GameController.instance.AddScore(requestedCash);
-
+                GameController.instance.AddToTimeLeft(gameTimeAdditon);
                 // TODO: Play cash sound effect
                 audio.PlayOneShot(finishSound);
 

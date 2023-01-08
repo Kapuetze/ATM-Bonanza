@@ -137,6 +137,14 @@ public class GameController : MonoBehaviour
         UIController.instance.ShowEndScreen(score);
     }
 
+    public void AddToTimeLeft(float t)
+    {
+        timeLeft += t;
+        timeLeft = Mathf.Clamp(timeLeft, 0f, maxTimer);
+
+        UIController.instance.SetTimer((int)timeLeft);
+    }
+
     /// <summary>
     /// Add score to the game score
     /// </summary>
