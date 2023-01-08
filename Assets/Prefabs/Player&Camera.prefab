@@ -394,6 +394,14 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 187505532488679757, guid: 94573b3cd67c66e45b99e3f0f3fffbe7, type: 3}
+      propertyPath: dashSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ac42b3bcc3c4bb149a4e0ce963932081, type: 3}
+    - target: {fileID: 187505532488679757, guid: 94573b3cd67c66e45b99e3f0f3fffbe7, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6b14d08a0e74a654a8487bcab8122014, type: 3}
+    - target: {fileID: 187505532488679757, guid: 94573b3cd67c66e45b99e3f0f3fffbe7, type: 3}
       propertyPath: dashDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -442,7 +450,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.65
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -538,8 +546,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1004fa65ffd1d8b489b53f4a8aee8e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyPrefab: {fileID: 3149964398345315555, guid: b8f424abfbc75d144a635187a988fbb9, type: 3}
-  throwForce: 25
   selectedMoneyIcon: {fileID: 2889253815769714620}
   takeSound: {fileID: 8300000, guid: 41ef4c62490e45c438a1772dda91e5c2, type: 3}
 --- !u!1001 &5257451621652577250
@@ -555,7 +561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9102228182112692340, guid: b522a47bad83b494b9bd21be570ffee2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0000009536743
+      value: 0.0000010728836
       objectReference: {fileID: 0}
     - target: {fileID: 9102228182112692340, guid: b522a47bad83b494b9bd21be570ffee2, type: 3}
       propertyPath: m_LocalPosition.y
