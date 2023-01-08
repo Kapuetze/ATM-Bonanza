@@ -36,7 +36,7 @@ public class Inventory : MonoBehaviour
         }
 
         //Interact with F
-        if (Input.GetKeyDown(KeyCode.F) && GetCurrentSelectedItem() != null && currentDispenserZone != null && currentDispenserZone.customerController.currentCustomer != null)
+        if (Input.GetKeyDown(KeyCode.E) && GetCurrentSelectedItem() != null && currentDispenserZone != null && currentDispenserZone.customerController.currentCustomer != null)
         {
             Item item = GetCurrentSelectedItem();
             currentDispenserZone.customerController.currentCustomer.TakeCash((int)item.denomination);
