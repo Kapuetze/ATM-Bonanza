@@ -13,7 +13,8 @@ using static UnityEditor.Progress;
 public class Inventory : MonoBehaviour
 {
     MoneyDispenser currentDispenserZone = null;
-    int currentItem = 0;
+
+    int currentItem = -1;
 
     private Dictionary<Denomination, int> moneyBag = new Dictionary<Denomination, int>();
 
@@ -105,9 +106,9 @@ public class Inventory : MonoBehaviour
     private Item GetItemAt(int index)
     {
         Item result = null;
-        if (moneyBag.Count > 0)
+        if (moneyBag.Count > 0 && index != -1)
         {
-            var element = moneyBag.ElementAt(currentItem);
+            var element = moneyBag.ElementAt(index);
             result = new Item
             {
                 denomination = element.Key,
@@ -133,6 +134,14 @@ public class Inventory : MonoBehaviour
             moneyBag.Add(denomination, 1);
         }
 
+        if (moneyBag.Count == 1)
+        {
+            currentItem = 0;
+
+            Item item = GetItemAt(0);
+            SetSelectedItem(item);
+        }
+        
         UIController.instance.SetInventory(moneyBag);
     }
 
@@ -149,7 +158,6 @@ public class Inventory : MonoBehaviour
             // Remove the whole key entry if it is 0
             if (moneyBag[denomination] == 0)
             {
-                GetCurrentSelectedItem();
                 RemoveSelectedItem();
                 moneyBag.Remove(denomination);
             }

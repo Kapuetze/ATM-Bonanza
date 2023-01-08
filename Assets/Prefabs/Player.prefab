@@ -118,7 +118,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 187505532488679756}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 43f67efd4082a89458db0cf2e003df51, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -158,8 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f62f95f298c299488dbfe752b4d4e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3000
-  jumpHeight: 5
+  speed: 500
+  jumpHeight: 2
   airDrag: 2
   dragCurve:
     serializedVersion: 2
@@ -190,8 +190,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  currentDrag: 1
-  airtime: 0
+  disableControls: 0
 --- !u!1 &6191787849594888966
 GameObject:
   m_ObjectHideFlags: 0

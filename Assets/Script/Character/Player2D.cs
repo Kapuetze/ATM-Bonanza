@@ -61,7 +61,7 @@ public class Player2D : MonoBehaviour
             {
                 rb.gravityScale = dynamicGravMultiplier.x;
             }
-            else
+            else if(!isGrounded)
             {
                 rb.gravityScale = dynamicGravMultiplier.z;
             }
