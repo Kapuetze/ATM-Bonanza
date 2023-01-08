@@ -176,13 +176,7 @@ public class Inventory : MonoBehaviour
         if (!selectedMoneyIcon.activeInHierarchy)
             selectedMoneyIcon.SetActive(true);
 
-        // Get the color from enumeration description
-        string hexColor = item.denomination.GetDescription();
-        ColorUtility.TryParseHtmlString(hexColor, out Color color);
-        selectedMoneyIcon.GetComponent<Image>().color = color;
-
-        // Change the text to the current amount
-        selectedMoneyIcon.transform.Find("MoneyText").GetComponent<TMP_Text>().text = item.amount.ToString();
+        selectedMoneyIcon.GetComponent<MoneyIcon>().SetMoneyValues(item.denomination, item.amount);
     }
 
     /// <summary>

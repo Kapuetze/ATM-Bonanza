@@ -89,14 +89,7 @@ public class UIController : MonoBehaviour
         {
             // Instantiate new icon
             GameObject newIcon = Instantiate(moneyIconPrefab, inventory.transform);
-
-            // Get the color from enumeration description
-            string hexColor = item.Key.GetDescription();
-            ColorUtility.TryParseHtmlString(hexColor, out Color color);
-            newIcon.GetComponent<Image>().color = color;
-
-            // Change the text to the current amount
-            newIcon.transform.Find("MoneyText").GetComponent<TMP_Text>().text = item.Value.ToString();
+            newIcon.GetComponent<MoneyIcon>().SetMoneyValues(item.Key, item.Value);
         }
     }
 
