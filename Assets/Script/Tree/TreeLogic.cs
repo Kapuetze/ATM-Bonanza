@@ -97,9 +97,12 @@ public class TreeLogic : MonoBehaviour
         {
             if(closestGrowSpot != null)
             {
-                closestGrowSpot.money.StopGrowing();
-                closestGrowSpot.money = null;
-                closestGrowSpot.cooldown = Time.time + GROW_SPOT_COOLDOWN;
+                if(closestGrowSpot.money != null)
+                {
+                    closestGrowSpot.money.StopGrowing();
+                    closestGrowSpot.money = null;
+                    closestGrowSpot.cooldown = Time.time + GROW_SPOT_COOLDOWN;
+                }
 
                 audio.Play();
             }
