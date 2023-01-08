@@ -68,10 +68,11 @@ public class Customer : MonoBehaviour
     /// <param name="cash"></param>
     public bool TakeCash(int cash)
     {
-        receivedCash += cash;
         int cashDifference = requestedCash - receivedCash;
-        if(cashDifference >= cash)
+        if (cashDifference >= cash)
         {
+            receivedCash += cash;
+            cashDifference -= cash;
             requestedMoneyText.text = cashDifference.ToString();
 
             if (cashDifference <= 0)
@@ -85,7 +86,10 @@ public class Customer : MonoBehaviour
             }
             return true;
         }
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
     /// <summary>
