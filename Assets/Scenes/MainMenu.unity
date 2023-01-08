@@ -242,7 +242,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7804121816912499591, guid: 7be1c254b8a12f64b8b0509d97d3ea34, type: 3}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: NavigteInstructions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
