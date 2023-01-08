@@ -24,6 +24,7 @@ public class TreeLogic : MonoBehaviour
 
     #nullable enable
     private GameObject? player;
+    private GrowSpot? closestGrowSpot = null;
     #nullable disable
 
     // Start is called before the first frame update
@@ -31,12 +32,18 @@ public class TreeLogic : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
 
-        InvokeRepeating("CheckTreeStatus", GROW_SPOT_COOLDOWN, SPAWN_INTERVAL);
+        InvokeRepeating("CheckTreeStatus", INITIAL_SPAWN_COOLDOWN, SPAWN_INTERVAL);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(player != null)
+        {
+            CheckForClosestSpot();
+            if(closestGrowSpot != null)closestGrowSpot.indicator.SetActive(true);
+        }
+
         if(Input.GetKeyDown(KeyCode.E))
         {
             HarvestTree();
@@ -88,28 +95,6 @@ public class TreeLogic : MonoBehaviour
     {
         if(harvestAllowed == true)
         {
-            Vector3 position = player.transform.position;
-
-            #nullable enable
-            GrowSpot? closestGrowSpot = null;
-            #nullable disable
-
-            float minDistance = Mathf.Infinity;
-            float currentDistance = 0f;
-            // Find the growSpot that is closest to the player position
-            foreach (GrowSpot growSpot in spots)
-            {
-                if(growSpot.money != null)
-                {
-                    currentDistance = Vector3.Distance(growSpot.money.transform.position, position);
-                    if(currentDistance < minDistance)
-                    {
-                        minDistance = currentDistance;
-                        closestGrowSpot = growSpot;
-                    }
-                }
-            }
-
             if(closestGrowSpot != null)
             {
                 closestGrowSpot.money.StopGrowing();
@@ -117,6 +102,28 @@ public class TreeLogic : MonoBehaviour
                 closestGrowSpot.cooldown = Time.time + GROW_SPOT_COOLDOWN;
 
                 audio.Play();
+            }
+        }
+    }
+
+    private void CheckForClosestSpot()
+    {
+        Vector3 position = player.transform.position;
+
+        float minDistance = Mathf.Infinity;
+        float currentDistance = 0f;
+        // Find the growSpot that is closest to the player position
+        foreach (GrowSpot growSpot in spots)
+        {
+            growSpot.indicator.SetActive(false);
+            if (growSpot.money != null)
+            {
+                currentDistance = Vector3.Distance(growSpot.money.transform.position, position);
+                if (currentDistance < minDistance)
+                {
+                    minDistance = currentDistance;
+                    closestGrowSpot = growSpot;
+                }
             }
         }
     }

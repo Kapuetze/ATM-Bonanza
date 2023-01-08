@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GrowSpot : MonoBehaviour
 {
+    public GameObject indicator;
     #nullable enable
     public Money? money;
     #nullable disable
