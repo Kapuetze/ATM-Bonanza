@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2651926460477889341, guid: 2686c3722966127449c7eaaefc71ed87, type: 3}
       propertyPath: m_Name
-      value: Customer_Cone
+      value: Customer_Cone Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2651926460477889342, guid: 2686c3722966127449c7eaaefc71ed87, type: 3}
       propertyPath: m_RootOrder
@@ -59,5 +59,13 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 984c3f097a2f11941af2d90c471b306e, type: 3}
+    - target: {fileID: 3287213182932604111, guid: 2686c3722966127449c7eaaefc71ed87, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4fe662262d4794b4f90785210b452a23, type: 2}
+    - target: {fileID: 3287213182932604111, guid: 2686c3722966127449c7eaaefc71ed87, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2299553188735357385, guid: 4fe662262d4794b4f90785210b452a23, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2686c3722966127449c7eaaefc71ed87, type: 3}
