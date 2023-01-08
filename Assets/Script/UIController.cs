@@ -81,9 +81,11 @@ public class UIController : MonoBehaviour
         if (mainMenu.activeInHierarchy)
         {
             mainMenu.SetActive(false);
+            GameController.instance.PauseLevel();
         }
         else
         {
+            GameController.instance.ResumeLevel();
             mainMenu.SetActive(true);
         }
     }
