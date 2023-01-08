@@ -336,6 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cc: {fileID: 0}
+  speed: 3
   successSound: {fileID: 8300000, guid: ce0454e7a476f3044bf166d206a88f38, type: 3}
   errorSound: {fileID: 8300000, guid: aaed89c9b602fb8489221a39112f64bb, type: 3}
   finishSound: {fileID: 8300000, guid: 0baae9b7f82717a41b132cf511843368, type: 3}
