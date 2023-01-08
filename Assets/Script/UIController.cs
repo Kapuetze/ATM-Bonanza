@@ -27,6 +27,8 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private TMP_Text endScore;
 
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -42,6 +44,7 @@ public class UIController : MonoBehaviour
 
         mainMenu = transform.Find("MainMenu").gameObject;
         inventory = transform.Find("Inventory").gameObject;
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -114,6 +117,7 @@ public class UIController : MonoBehaviour
     {
         endScore.text = score.ToString();
         endScreen.SetActive(true);
+        audioSource.Play();
     }
 
     public void HideEndScreen()
