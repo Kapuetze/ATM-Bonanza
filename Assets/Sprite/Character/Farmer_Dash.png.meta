@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4a5de2e90318f784ba0091dcaa873474
+guid: f1f182f3147c0df468ce7dc353217842
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -67,9 +67,9 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
@@ -103,10 +103,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Farmer_Jump_0
+      name: Farmer_Dash_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 386a5818817781e4fbf52a4c3fcbac7c
-      internalID: -1221278097
+      spriteID: 9c1af7333aad08c42a07f840d8aaf275
+      internalID: -383102719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Farmer_Jump_1
+      name: Farmer_Dash_1
       rect:
         serializedVersion: 2
         x: 16
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b40c5c395ad92a4c8fb2025ac787231
-      internalID: 276759439
+      spriteID: 53f042a8aff5a3b4199c806cbad21df4
+      internalID: 113078125
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Farmer_Jump_2
+      name: Farmer_Dash_2
       rect:
         serializedVersion: 2
         x: 32
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2bd5c4d73c1117e458ec1c42a076699b
-      internalID: -5344134
+      spriteID: 78ed9576356989a4caac8cbbcb73e65c
+      internalID: -694136504
       vertices: []
       indices: 
       edges: []
@@ -190,9 +190,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Farmer_Jump_1: 276759439
-      Farmer_Jump_2: -5344134
-      Farmer_Jump_0: -1221278097
+      Farmer_Dash_1: 113078125
+      Farmer_Dash_0: -383102719
+      Farmer_Dash_2: -694136504
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
