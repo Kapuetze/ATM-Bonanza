@@ -44,7 +44,8 @@ public class Customer : MonoBehaviour
         requestedCash = Random.Range(gameController.difficulty.minRequestedAmount / 10 * 2, gameController.difficulty.maxRequestedAmount / 10 * 2) * 10 / 2;
         print(requestedCash);
         
-        timer = requestedCash * gameController.difficulty.patienceMultiplier;
+        // Stay 30s on default + a dynamic amount for the money requested
+        timer = Int32.MaxValue;
 
         requestedMoneyText.text = requestedCash.ToString();
 
@@ -65,20 +66,29 @@ public class Customer : MonoBehaviour
     /// Increase cash 
     /// </summary>
     /// <param name="cash"></param>
-    public void TakeCash(int cash)
+    public bool TakeCash(int cash)
     {
-        receivedCash += cash;
         int cashDifference = requestedCash - receivedCash;
-        requestedMoneyText.text = cashDifference.ToString();
-
-        if (cashDifference <= 0)
+        if (cashDifference >= cash)
         {
-            // Punish the player if the received cash exceeds what was requested
-            GameController.instance.AddScore(requestedCash);
+            receivedCash += cash;
+            cashDifference -= cash;
+            requestedMoneyText.text = cashDifference.ToString();
 
-            // TODO: Play cash sound effect
+            if (cashDifference <= 0)
+            {
+                // Punish the player if the received cash exceeds what was requested
+                GameController.instance.AddScore(requestedCash);
 
-            Leave();
+                // TODO: Play cash sound effect
+
+                Leave();
+            }
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

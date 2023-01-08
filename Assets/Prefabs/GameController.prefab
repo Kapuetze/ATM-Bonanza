@@ -50,5 +50,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bb0afcfdc1571034695911c3a76ff003, type: 2}
   difficulty: {fileID: 0}
   maxCustomers: 0
-  maxTimer: 70
-  difficultyIncreaseInterval: 150
+  maxTimer: 180
+  difficultyIncreaseInterval: 60

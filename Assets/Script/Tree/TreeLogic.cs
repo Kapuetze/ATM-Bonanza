@@ -8,6 +8,8 @@ public class TreeLogic : MonoBehaviour
     private float SPAWN_INTERVAL = 0.3f;
     [SerializeField]
     private float GROW_SPOT_COOLDOWN = 10.0f;
+    [SerializeField]
+    private float INITIAL_SPAWN_COOLDOWN = 5.0f;
 
     public List<GrowSpot> spots = new List<GrowSpot>();
 
@@ -23,7 +25,7 @@ public class TreeLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("CheckTreeStatus", SPAWN_INTERVAL, SPAWN_INTERVAL);
+        InvokeRepeating("CheckTreeStatus", GROW_SPOT_COOLDOWN, SPAWN_INTERVAL);
     }
 
     // Update is called once per frame
