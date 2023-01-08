@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using DG.Tweening;
 
 public class Customer : MonoBehaviour
 {
     public CustomerController cc;
+    public float speed = 2.0f;
 
     /// <summary>
     /// How much money does the customer want
@@ -31,10 +33,13 @@ public class Customer : MonoBehaviour
 
     private TMP_Text requestedMoneyText;
     private GameController gameController;
+    private Tween animation;
+    private bool hasWalkedIn = false;
 
     void Awake()
     {
         requestedMoneyText = transform.Find("Canvas/RequestedMoney").GetComponentInChildren<TMP_Text>();
+
     }
 
     void Start()
@@ -43,9 +48,6 @@ public class Customer : MonoBehaviour
         gameController = GameController.instance;
         requestedCash = Random.Range(gameController.difficulty.minRequestedAmount / 10 * 2, gameController.difficulty.maxRequestedAmount / 10 * 2) * 10 / 2;
         print(requestedCash);
-        
-        // Stay 30s on default + a dynamic amount for the money requested
-        timer = Int32.MaxValue;
 
         requestedMoneyText.text = requestedCash.ToString();
 
@@ -56,9 +58,9 @@ public class Customer : MonoBehaviour
     {
         // Customer leaves when the time is up
         timer -= Time.deltaTime;
-        if (timer <= 0)
+        if (hasWalkedIn == true && timer <= 0)
         {
-            Leave();
+            StartLeaveAnimation();
         }
     }
 
@@ -82,7 +84,7 @@ public class Customer : MonoBehaviour
 
                 // TODO: Play cash sound effect
 
-                Leave();
+                StartLeaveAnimation();
             }
             return true;
         }
@@ -99,14 +101,30 @@ public class Customer : MonoBehaviour
     public void SetCustomerController(CustomerController controller)
     {
         customerController = controller;
+
+        transform.DOShakeScale(speed, 0.5f, 10, 90, false);
+        transform.DOMove(customerController.customerDestinationPoint.position, speed).OnComplete(() =>
+        {
+            hasWalkedIn = true;
+            // For now we disabled automatic timer leave
+            timer = Int32.MaxValue;
+        });
     }
 
+
+    private void StartLeaveAnimation()
+    {
+        transform.DOShakeScale(speed, 0.5f, 10, 90, false);
+        transform.DOMove(customerController.customerSpawnPoint.position, speed).OnComplete(() =>
+        {
+            Leave();
+        });
+    }
     /// <summary>
     /// Customer leaves without giving points
     /// </summary>
     private void Leave()
     {
-        // TODO: Leave animation
         customerController.RemoveCustomer(gameObject);
         GameController.instance.IncrementLeftCustomers();
         Debug.Log("Customer left.");
