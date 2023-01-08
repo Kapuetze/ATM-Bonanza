@@ -7,7 +7,7 @@ using static UnityEditor.Progress;
 
 public enum Denomination 
 {
-    [Description("#56FF74")]
+    [Description("#767F8B")]
     Five = 5, 
     [Description("#FF4A37")]
     Ten = 10,
@@ -15,12 +15,12 @@ public enum Denomination
     Twenty = 20,
     [Description("#56FF74")]
     Fifty = 50,
-    [Description("#37e302")]
+    /*[Description("#37e302")]
     Onehundred = 100,
     [Description("#e1eb34")]
     Twohundred = 200,
     [Description("#eb34d5")]
-    Fivehundred = 500
+    Fivehundred = 500*/
 }
 
 public static class EnumHelper
