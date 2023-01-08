@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -13,10 +12,13 @@ public class UIController : MonoBehaviour
     /// </summary>
     public static UIController instance;
 
-    private TMP_Text scoreText;
     private GameObject mainMenu;
     private GameObject inventory;
 
+    [SerializeField]
+    private TMP_Text scoreText;
+    [SerializeField]
+    private TMP_Text timerText;
     [SerializeField]
     private GameObject moneyIconPrefab;
 
@@ -40,13 +42,17 @@ public class UIController : MonoBehaviour
 
         mainMenu = transform.Find("MainMenu").gameObject;
         inventory = transform.Find("Inventory").gameObject;
-        scoreText = transform.Find("Score").GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>
@@ -56,6 +62,15 @@ public class UIController : MonoBehaviour
     public void SetScore(int score)
     {
         scoreText.text = score.ToString();
+    }
+
+    /// <summary>
+    /// Sets the current timer in the UI text field
+    /// </summary>
+    /// <param name="score"></param>
+    public void SetTimer(int timer)
+    {
+        timerText.text = timer.ToString();
     }
 
     /// <summary>
@@ -89,14 +104,7 @@ public class UIController : MonoBehaviour
         {
             // Instantiate new icon
             GameObject newIcon = Instantiate(moneyIconPrefab, inventory.transform);
-
-            // Get the color from enumeration description
-            string hexColor = item.Key.GetDescription();
-            ColorUtility.TryParseHtmlString(hexColor, out Color color);
-            newIcon.GetComponent<Image>().color = color;
-
-            // Change the text to the current amount
-            newIcon.transform.Find("MoneyText").GetComponent<TMP_Text>().text = item.Value.ToString();
+            newIcon.GetComponent<MoneyIcon>().SetMoneyValues(item.Key, item.Value);
         }
     }
 

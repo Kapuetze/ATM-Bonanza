@@ -59,5 +59,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Customer_Frog
       objectReference: {fileID: 0}
+    - target: {fileID: 1077722729209184204, guid: 6bbd224218b4b4d4a854b6c5e8bc948f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4fe662262d4794b4f90785210b452a23, type: 2}
+    - target: {fileID: 1077722729209184204, guid: 6bbd224218b4b4d4a854b6c5e8bc948f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2299553188735357385, guid: 4fe662262d4794b4f90785210b452a23, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bbd224218b4b4d4a854b6c5e8bc948f, type: 3}

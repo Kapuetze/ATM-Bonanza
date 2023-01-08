@@ -1,13 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 [RequireComponent(typeof(Collider2D))]
 public class Inventory : MonoBehaviour
@@ -36,7 +30,7 @@ public class Inventory : MonoBehaviour
         }
 
         //Interact with F
-        if (Input.GetKeyDown(KeyCode.F) && GetCurrentSelectedItem() != null && currentDispenserZone != null && currentDispenserZone.customerController.currentCustomer != null)
+        if (Input.GetKeyDown(KeyCode.E) && GetCurrentSelectedItem() != null && currentDispenserZone != null && currentDispenserZone.customerController.currentCustomer != null)
         {
             Item item = GetCurrentSelectedItem();
             currentDispenserZone.customerController.currentCustomer.TakeCash((int)item.denomination);
@@ -176,13 +170,7 @@ public class Inventory : MonoBehaviour
         if (!selectedMoneyIcon.activeInHierarchy)
             selectedMoneyIcon.SetActive(true);
 
-        // Get the color from enumeration description
-        string hexColor = item.denomination.GetDescription();
-        ColorUtility.TryParseHtmlString(hexColor, out Color color);
-        selectedMoneyIcon.GetComponent<Image>().color = color;
-
-        // Change the text to the current amount
-        selectedMoneyIcon.transform.Find("MoneyText").GetComponent<TMP_Text>().text = item.amount.ToString();
+        selectedMoneyIcon.GetComponent<MoneyIcon>().SetMoneyValues(item.denomination, item.amount);
     }
 
     /// <summary>
