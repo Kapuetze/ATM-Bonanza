@@ -13,10 +13,13 @@ public class UIController : MonoBehaviour
     /// </summary>
     public static UIController instance;
 
-    private TMP_Text scoreText;
     private GameObject mainMenu;
     private GameObject inventory;
 
+    [SerializeField]
+    private TMP_Text scoreText;
+    [SerializeField]
+    private TMP_Text timerText;
     [SerializeField]
     private GameObject moneyIconPrefab;
 
@@ -40,7 +43,6 @@ public class UIController : MonoBehaviour
 
         mainMenu = transform.Find("MainMenu").gameObject;
         inventory = transform.Find("Inventory").gameObject;
-        scoreText = transform.Find("Score").GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
@@ -56,6 +58,15 @@ public class UIController : MonoBehaviour
     public void SetScore(int score)
     {
         scoreText.text = score.ToString();
+    }
+
+    /// <summary>
+    /// Sets the current timer in the UI text field
+    /// </summary>
+    /// <param name="score"></param>
+    public void SetTimer(int timer)
+    {
+        timerText.text = timer.ToString();
     }
 
     /// <summary>
