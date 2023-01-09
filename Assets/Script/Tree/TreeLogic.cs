@@ -78,7 +78,7 @@ public class TreeLogic : MonoBehaviour
         foreach(GrowSpot growSpot in spots)
         {
             // Check if grow spot is empty and cooldown exceeded
-            if(!growSpot.money && (growSpot.cooldown == 0f || Time.time > growSpot.cooldown))
+            if(!growSpot.money && (growSpot.cooldown == 0f || Time.timeSinceLevelLoad > growSpot.cooldown))
             {
                 growSpot.money = Instantiate(moneyPrefab, growSpot.transform).GetComponent<Money>();
             }
@@ -92,7 +92,6 @@ public class TreeLogic : MonoBehaviour
             if (growSpot.money != null)
             {
                 growSpot.money.IncreaseTimer(WATER_TIMER_INCREASE);
-                print("cooldown: " + growSpot.cooldown);
             }
             else
             {
@@ -112,7 +111,7 @@ public class TreeLogic : MonoBehaviour
                     closestGrowSpot.indicator.SetActive(false);
                     closestGrowSpot.money.StopGrowing();
                     closestGrowSpot.money = null;
-                    closestGrowSpot.cooldown = Time.time + GROW_SPOT_COOLDOWN;
+                    closestGrowSpot.cooldown = Time.timeSinceLevelLoad + GROW_SPOT_COOLDOWN;
                     closestGrowSpot = null;
                 }
 
