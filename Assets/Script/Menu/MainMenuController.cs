@@ -6,30 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject MainMenuCanvas;
-    [SerializeField]
-    private GameObject SettingsCanvas;
-    [SerializeField]
-    private GameObject InstructionsCanvas;
-
-
-    void Awake()
-    {
-        SettingsCanvas.SetActive(false);
-        InstructionsCanvas.SetActive(false);
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void StartGame()
@@ -37,18 +23,19 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene("Level1 Neu", LoadSceneMode.Single);
     }
 
-    public void NavigteInstructions()
+    public void NavigateInstructions()
     {
-        MainMenuCanvas.SetActive(false);
-        SettingsCanvas.SetActive(false);
-        InstructionsCanvas.SetActive(true);
+        SceneManager.LoadScene("Instructions", LoadSceneMode.Single);
+    }
+
+    public void NavigateMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void NavigateSettings()
     {
-        MainMenuCanvas.SetActive(false);
-        SettingsCanvas.SetActive(true);
-        InstructionsCanvas.SetActive(false);
+        SceneManager.LoadScene("Settings", LoadSceneMode.Single);
     }
 
     public void QuitGame()
