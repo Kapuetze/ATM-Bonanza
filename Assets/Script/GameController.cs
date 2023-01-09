@@ -110,6 +110,14 @@ public class GameController : MonoBehaviour
     }
 
     /// <summary>
+    /// Restarts the scene
+    /// </summary>
+    public void GoToMain()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    /// <summary>
     /// Pause the game
     /// </summary>
     public void PauseLevel()
