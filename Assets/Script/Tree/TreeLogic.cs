@@ -27,12 +27,12 @@ public class TreeLogic : MonoBehaviour
     private GrowSpot? closestGrowSpot = null;
     #nullable disable
 
+    private float timer = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
-
-        InvokeRepeating("CheckTreeStatus", INITIAL_SPAWN_COOLDOWN, SPAWN_INTERVAL);
     }
 
     // Update is called once per frame
@@ -47,6 +47,11 @@ public class TreeLogic : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E))
         {
             HarvestTree();
+        }
+
+        if(INITIAL_SPAWN_COOLDOWN < Time.time)
+        {
+            CheckTreeStatus();
         }
     }
 
@@ -87,6 +92,11 @@ public class TreeLogic : MonoBehaviour
             if (growSpot.money != null)
             {
                 growSpot.money.IncreaseTimer(WATER_TIMER_INCREASE);
+                print("cooldown: " + growSpot.cooldown);
+            }
+            else
+            {
+                growSpot.cooldown -= WATER_TIMER_INCREASE * 1.5f;
             }
         }
     }
@@ -99,9 +109,11 @@ public class TreeLogic : MonoBehaviour
             {
                 if(closestGrowSpot.money != null)
                 {
+                    closestGrowSpot.indicator.SetActive(false);
                     closestGrowSpot.money.StopGrowing();
                     closestGrowSpot.money = null;
                     closestGrowSpot.cooldown = Time.time + GROW_SPOT_COOLDOWN;
+                    closestGrowSpot = null;
                 }
 
                 audio.Play();
