@@ -10,17 +10,5 @@ public class SetSFXVolume : MonoBehaviour
     {
         mixer.SetFloat("SFXVol", Mathf.Log10(sliderValue) * 20);
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
 

@@ -12,7 +12,7 @@ public enum Denomination
     Ten = 10,
     [Description("#3643FF")]
     Twenty = 20,
-    [Description("#56FF74")]
+    [Description("#c55e1b")]
     Fifty = 50,
     /*[Description("#37e302")]
     Onehundred = 100,

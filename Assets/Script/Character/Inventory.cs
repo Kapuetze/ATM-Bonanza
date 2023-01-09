@@ -65,8 +65,8 @@ public class Inventory : MonoBehaviour
             AddBill(other.denomination);
             // Destroy the money object
             Destroy(collision.gameObject);
-
-            audio.PlayOneShot(takeSound);
+            audio.clip = takeSound;
+            audio.Play();
         }
     }
 

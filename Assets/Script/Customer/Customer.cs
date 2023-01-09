@@ -98,20 +98,23 @@ public class Customer : MonoBehaviour
                 GameController.instance.AddScore(requestedCash);
                 GameController.instance.AddToTimeLeft(gameTimeAdditon);
                 // TODO: Play cash sound effect
-                audio.PlayOneShot(finishSound);
+                audio.clip = finishSound;
+                audio.Play();
 
                 StartLeaveAnimation();
             }
             else
             {
-                audio.PlayOneShot(successSound);
+                audio.clip = successSound;
+                audio.Play();
             }
 
             return true;
         }
         else
         {
-            audio.PlayOneShot(errorSound);
+            audio.clip = errorSound;
+            audio.Play();
             return false;
         }
     }
@@ -130,7 +133,8 @@ public class Customer : MonoBehaviour
             hasWalkedIn = true;
             // For now we disabled automatic timer leave
             timer = Int32.MaxValue;
-            audio.PlayOneShot(needMoneySound);
+            audio.clip = needMoneySound;
+            audio.Play();
         });
     }
 

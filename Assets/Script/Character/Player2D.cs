@@ -126,16 +126,12 @@ public class Player2D : MonoBehaviour
 
     public void GoRagdoll()
     {
-        coll.sharedMaterial.bounciness = 0.5f;
-        coll.sharedMaterial.friction = 0.7f;
         disableControls = true;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public void StandUp()
     {
-        coll.sharedMaterial.bounciness = 0f;
-        coll.sharedMaterial.friction = 0f;
         disableControls = false;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         transform.DORotate(Vector3.zero, 0.5f);
@@ -146,7 +142,8 @@ public class Player2D : MonoBehaviour
         dashReady = false;
         anim.SetInteger("State", 3);
         dashEffect.Play();
-        audioSource.PlayOneShot(dashSound);
+        audioSource.clip = dashSound;
+        audioSource.Play();
 
         float vertical = 0.0f;
         if(isGrounded == false)
@@ -183,8 +180,8 @@ public class Player2D : MonoBehaviour
         float jumpForce = Mathf.Sqrt(jumpHeight * -2f * ((grav * rb.gravityScale) * rb.gravityScale));
         rb.velocity = Vector2.zero;
         rb.velocity += Vector2.up * jumpForce;
-
-        audioSource.PlayOneShot(jumpSound);
+        audioSource.clip = jumpSound;
+        audioSource.Play();
     }
 
     private void BeGrounded()

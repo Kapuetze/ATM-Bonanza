@@ -54,7 +54,7 @@ public class Pump : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.TryGetComponent<Player2D>(out player))
+        if(collision.collider.TryGetComponent<Player2D>(out player) && release)
         {
             waterEffect.Play();
             if (!audioSource.isPlaying)
@@ -66,7 +66,7 @@ public class Pump : MonoBehaviour
 
     public void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.TryGetComponent<Player2D>(out player))
+        if (collision.collider.TryGetComponent<Player2D>(out player) && !release)
         {
             waterEffect.Stop();
 
