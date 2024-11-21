@@ -54,7 +54,7 @@ public class Player2D : MonoBehaviour
         #region ground check
         // lowest point of the collider
         Vector3 low = new Vector3(coll.bounds.center.x, coll.bounds.min.y, coll.bounds.center.z);
-
+        
         Collider2D[] targets = Physics2D.OverlapCircleAll(low, groundCheckSize, groundMask);
         // ground check logic
         if (targets.Length > 0)
