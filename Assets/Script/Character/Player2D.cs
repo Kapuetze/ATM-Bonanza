@@ -90,6 +90,7 @@ public class Player2D : MonoBehaviour
             }
         }
         #endregion
+        Debug.Log("Update");
         #region Dashing
         if(Input.GetKeyDown(dashButton) && dashReady && !disableControls)
         {
