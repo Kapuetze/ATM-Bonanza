@@ -103,6 +103,14 @@ public class Player2D : MonoBehaviour
             print("falling");
         }
         #endregion
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            anim.SetBool("Example", true);
+        }
+        if (Input.GetKeyUp(KeyCode.J))
+        {
+            anim.SetBool("Example", false);
+        }
 
     }
 
