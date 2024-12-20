@@ -90,7 +90,7 @@ public class Player2D : MonoBehaviour
             }
         }
         #endregion
-        Debug.Log("Update");
+        
         #region Dashing
         if(Input.GetKeyDown(dashButton) && dashReady && !disableControls)
         {
@@ -100,7 +100,7 @@ public class Player2D : MonoBehaviour
         #region falling
         if (!isGrounded && rb.velocity.y < 0)
         {
-            print("falling");
+            
         }
         #endregion
         if (Input.GetKeyDown(KeyCode.J))
