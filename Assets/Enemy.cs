@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 
@@ -38,8 +39,11 @@ public class Enemy : MonoBehaviour
     private bool isGrounded = true;
     public float groundCheckSize = 0.3f;
     public LayerMask groundMask;
-    private float jumpHeight = 6;
+    public float jumpHeight = 6;
+    public GameObject projectile;
+    public float projectileSpeed = 0.1f;
     private float grav = -9.81f;
+    private bool readyToShoot = true;
 
     // Start is called before the first frame update
     void Start()
@@ -78,12 +82,32 @@ public class Enemy : MonoBehaviour
         Collider2D[] playerHit = Physics2D.OverlapCircleAll(transform.position, playerSeekRadius, layerMask);
         if (0 < playerHit.Length)
         {
-            Hunt(playerHit[0]);
+            if(Vector3.Distance(playerHit[0].transform.position, transform.position) > 2)
+            {
+                Hunt(playerHit[0]);
+            }
+            else
+            {
+                actualSpeed = 0;
+                if(readyToShoot) StartCoroutine(Shoot(playerHit[0].transform));
+            }
         } else
         {
             lineRenderer.positionCount = 0;
             actualSpeed = speed.x;
         }
+    }
+
+    IEnumerator Shoot(Transform target)
+    {
+        readyToShoot = false;
+        GameObject newProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
+        Physics2D.IgnoreCollision(newProjectile.GetComponent<Collider2D>(), collider2D);
+        newProjectile.GetComponent<Rigidbody2D>().AddForce((target.position - newProjectile.transform.position).normalized * projectileSpeed);
+        Destroy(newProjectile, 5f);
+        yield return new WaitForSeconds(2f);
+
+        readyToShoot = true;
     }
 
     private void FixedUpdate()
@@ -183,10 +207,10 @@ public class Enemy : MonoBehaviour
             Gizmos.DrawSphere(topEdge, 0.1f);  // Adjust this to the actual contact point you want to visualize
         }
 
-        // Gizmos-Farbe setzen (optional, für Sichtbarkeit)
+        // Gizmos-Farbe setzen (optional, fï¿½r Sichtbarkeit)
         Gizmos.color = Color.green;
 
-        // Gizmo für den Kreis zeichnen, der den Spieler-Radius anzeigt
+        // Gizmo fï¿½r den Kreis zeichnen, der den Spieler-Radius anzeigt
         Gizmos.DrawWireSphere(transform.position, playerSeekRadius);
 
     }
