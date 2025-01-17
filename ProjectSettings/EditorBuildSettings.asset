@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VorlesungJump.unity
     guid: 31376a1c7da5ca145abcb7693b55c22f
+  - enabled: 1
+    path: Assets/Scenes/NewMainMenu.unity
+    guid: 8d590de484f573d42a485ddc02ae3f9d
+  - enabled: 1
+    path: Assets/Scenes/NewSettings.unity
+    guid: 5918859934058254c8399c2fc02254f7
   m_configObjects: {}
